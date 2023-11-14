@@ -1,52 +1,31 @@
-class ProductManager {
+async function Test() {
+  const ProductManager = require('./ProductManager');
+  const managerProduct = new ProductManager(`./producto.json`);
 
-    producto = []
-    constructor() { }
+  //Agregando productos mediante addProduct
+  await managerProduct.addProduct('BMW', 'Duster 12', 450000, '../', 1, 54);
+  await managerProduct.addProduct('Lamborghini', 'Aventador', 9000000, '../', 5, 32);
 
-    addProduct(title, description, price, thumbnail, code, stock) {
-        title = title || "producto prueba"
-        description = description || "Este es un producto prueba"
-        price = price || 200
-        thumbnail = thumbnail || "Sin imagen"
-        code = code || Math.random() * 99
-        stock = stock || 25
+  //Eliminando productos segun su id
+  try {
+    const productoeliminado = await managerProduct.deleteProduct();
+    console.log({ productoeliminado });
+    console.log(await managerProduct.getProducts());
+  } catch (error) {
+    console.log('error' + error);
+  }
 
-        let id = 0
-        for (let i = 0; i < this.producto.length; i++) {
-            const element = this.producto[i]
-            if (element.id > id) {
-                id = element.id
-            }
-        }
-        id++
-
-        if (this.getProductbyCode(code)) {
-            console.log("Error, no se puede repetir el mismo codigo")
-        } else return this.producto.push({ id: id, title, description, price, thumbnail, code, stock })
-    }
-
-    getProductbyCode(code) {
-        const product = this.producto.find(product => product.code === code)
-        if (product) return true
-    }
-
-    getProducts() {
-        console.log("PRODUCTOS ENCONTRADOS : ", this.producto)
-    }
-
-    getProductByid(id) {
-        const findById = this.producto.find((item) => item.id == id)
-
-        if (findById) {
-            console.log(`PRODUCTO ENCONTRADO, ID DEL PRODUCTO = ` + id)
-        } else console.log("NOT FOUND ID: " + id)
-    }
+  //Actualizando productos mediante updateProduct
+try {
+    const updateProduct = await managerProduct.updateProduct(1,'BMW', 'Lordtype 12', 500000, '../', 1, 21);
+console.log(updateProduct)
+await managerProduct.getProductByid(2)
+} catch(error){
+    console.log("error" + error)
 }
 
-const product = new ProductManager()
 
-product.addProduct("oaa", `ooooooo`, 200, "https//:www.google.com", 25, 6)
-product.addProduct("oaa", `ooooooo`, 200, "https//:www.google.com", 25, 1)
+  
+}
 
-product.getProductByid(15)
-console.log(product)
+Test();

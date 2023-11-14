@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "prettier": "3.0.3"
+  },
+  "name": "curso-backend",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "validator": "^13.11.0"
+  }
+}

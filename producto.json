@@ -1,0 +1,13 @@
+[
+  {
+    "newProduct": {
+      "id": 2,
+      "title": "Lamborghini",
+      "description": "Aventador",
+      "price": 9000000,
+      "thumbnail": "../",
+      "code": 5,
+      "stock": 32
+    }
+  }
+]
