@@ -1,13 +1,29 @@
 [
   {
-    "newProduct": {
-      "id": 2,
-      "title": "Lamborghini",
-      "description": "Aventador",
-      "price": 9000000,
-      "thumbnail": "../",
-      "code": 5,
-      "stock": 32
-    }
+    "id": 1,
+    "title": "BMW",
+    "description": "Lordtype 12",
+    "price": 500000,
+    "thumbnail": "../",
+    "code": 1,
+    "stock": 21
+  },
+  {
+    "id": 2,
+    "title": "Lamborghini",
+    "description": "Aventador",
+    "price": 9000000,
+    "thumbnail": "../",
+    "code": 5,
+    "stock": 32
+  },
+  {
+    "id": 4,
+    "title": "Lamborghini",
+    "description": "Spider",
+    "price": 10000000,
+    "thumbnail": "../",
+    "code": 3,
+    "stock": 2
   }
 ]
