@@ -10,5 +10,6 @@ POST http://localhost:4000/api/products
 PUT  http://localhost:4000/api/products/11
 
 ###
-DELETE http://localhost:4000/api/products/12
+DELETE http://localhost:4000/api/products/14
+
 

@@ -75,27 +75,5 @@
     "stock": 54,
     "category": "vehicles",
     "status": true
-  },
-  {
-    "id": 10,
-    "title": "Lamborghini",
-    "description": "Aventador",
-    "price": 9000000,
-    "thumbnail": "../",
-    "code": 5,
-    "stock": 32,
-    "category": "vehicles",
-    "status": true
-  },
-  {
-    "id": 11,
-    "title": "Chevrolet",
-    "description": "Onix",
-    "price": 710000,
-    "thumbnail": "../",
-    "code": 66,
-    "stock": 20,
-    "category": "vehicles",
-    "status": true
   }
 ]

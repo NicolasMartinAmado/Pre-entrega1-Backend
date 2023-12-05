@@ -1,0 +1,19 @@
+  <div>
+    <h3>PRODUCTOS EN TIEMPO REAL</h3>
+    <div class="swiper-wrapper" id="swiper">
+      {{#each productos}}
+      <div class="swiper-slide">
+         <p>id: {{this.id}}</p>
+        <img src={{this.thumbnail}}>
+        <p>{{this.title}}, {{this.description}}</p>
+        <p>Precio: $ {{this.price}}</p>
+        
+        <p> Code: {{this.code}}</p>
+        <hr>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <script src="socket.io/socket.io.js"></script>
+<script src={{scriptView}}></script>

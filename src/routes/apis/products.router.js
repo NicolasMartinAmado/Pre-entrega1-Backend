@@ -1,6 +1,6 @@
 const express = require(`express`)
 const productsRouter = express.Router()
-const ProductManager = require('../ProductManager');
+const ProductManager = require('../../ProductManager');
 const managerProduct = new ProductManager(`./producto.json`);
 
 async function inicializarProductos() {
@@ -13,7 +13,7 @@ inicializarProductos()
 productsRouter.use(express.json());
 productsRouter.use(express.urlencoded({ extended: true }));
 
-productsRouter.get(`/api/products`,async (req, res) => {
+productsRouter.get(`/`,async (req, res) => {
     const producto = await managerProduct.getProducts();
     
     let {limit} = req.query
@@ -30,7 +30,7 @@ productsRouter.get(`/api/products`,async (req, res) => {
     }
   });
 
-  productsRouter.get('/api/products/:id', async (req, res) => {
+  productsRouter.get('/:id', async (req, res) => {
     const id = req.params.id;
     const products = await managerProduct.getProductByid(id);
   
@@ -47,13 +47,13 @@ productsRouter.get(`/api/products`,async (req, res) => {
     }
   });
 
- productsRouter.post(`/api/products`, async (req, res) => {
-  let newProduct = req.body;
-  res.status(200).send("Producto agregado con exito!" + newProduct)
-  await managerProduct.addProduct('Audi', 'TT', 78500000, '../', 6, "vehicles",true);
+ productsRouter.post(`/`, async (req, res) => {
+  const newProduct = req.body;
+  res.status(200).send( await managerProduct.addProduct(newProduct.title, newProduct.description, newProduct.price, newProduct.thumbnail, newProduct.code, newProduct.stock, newProduct.category))
+ 
  })
 
-productsRouter.delete(`/api/products/:id`, async  (req, res) => {
+productsRouter.delete(`/:id`, async  (req, res) => {
   const id = req.params.id;
   const prodeliminado = await managerProduct.deleteProduct(id);
 
@@ -64,11 +64,11 @@ productsRouter.delete(`/api/products/:id`, async  (req, res) => {
   });
 })
   
-productsRouter.put('/api/products/:id', async (req,res) => {
+productsRouter.put('/:id', async (req,res) => {
   const productId = req.params.id;
   let updateData = req.body;
 
-  updateData = await managerProduct.updateProduct(12, "LAMBORGINI", "SPIDER", 9999999, "../", 0.5,1, "Vehicles", true)
+  updateData = await managerProduct.updateProduct(productId, updateData.title,updateData.description ,updateData.price,updateData.thumbnail,updateData.stock,updateData.category )
 
 
 
