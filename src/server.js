@@ -4,7 +4,7 @@ const apicarts = require(`./routes/apis/carts.routes.js`)
 const viewsRouter = require(`./routes/views.router.js`)
 const express = require(`express`);
 const app = express();
-const port = 4000;
+const port = 8080 || process.env.port
 const {Server} = require(`socket.io`)
 
 app.use(express.json())
