@@ -57,12 +57,15 @@ socketserver.on(`connection`, socket => {
     console.log(description)
      arraymsj.push({description: description })
      socketserver.emit('mensaje-cliente', arraymsj) })
-
-
      socket.on(`enviardatos`, (title, description) => {
       
       
       arraymsj.push({title: title, description: description})
       socketserver.emit('mensaje', arraymsj)
+     })
+
+     socket.on(`inputmensaje`, data =>{
+      arraymsj.push(data)
+      socketserver.emit(`mensajeuser`, arraymsj)
      })
 })

@@ -12,7 +12,9 @@ router.get(`/`, (req, res) => {
         {
             title: "Mercado E-commerce",
             name: "mercado amado",
-            style : `../index.css`
+            style : `../index.css`,
+            scriptView:'./js/index.js' 
+            
         }
     )
 })

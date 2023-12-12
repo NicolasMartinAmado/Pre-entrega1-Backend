@@ -1,3 +1,6 @@
+
+
+
 const socket = io();
 
 const inputTitle = document.querySelector(`#Titleproduct`);
@@ -40,7 +43,6 @@ inputThumbnail.addEventListener(`keyup`, (evt) => {
     inputThumbnail.value = ``;
   }
 });
-
 
 
 enviardatos.addEventListener(`click`, () => {
