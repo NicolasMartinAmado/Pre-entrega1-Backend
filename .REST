@@ -3,13 +3,37 @@ GET http://localhost:4000/api/products
 ###
 GET http://localhost:4000/api/products/1
 ###
-POST http://localhost:4000/api/products
+POST http://localhost:8080/api/products
+
+Content-Type: application/json
+{   
+    "title": "Lamborghini",
+    "description": "Spider",
+    "price": 10000000,
+    "thumbnail": "../",
+    "code": 3,
+    "stock": 2,
+    "category": "vehicles",
+    "status": true
+}
+###
+
+POST http://localhost:8080/api/users
+
+Content-Type: application/json
+
+
+{
+    "first_name": "PEPE",
+    "last_name": "jorge",
+    "email": "niki@gmail.com"
+}
 
 ###
 
 PUT  http://localhost:4000/api/products/11
 
 ###
-DELETE http://localhost:4000/api/products/14
+DELETE http://localhost:8080/api/products/1
 
 

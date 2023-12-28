@@ -1,16 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "BMW",
-    "description": "Duster 12",
-    "price": 450000,
-    "thumbnail": "../",
-    "code": 1,
-    "stock": 54,
-    "category": "vehicles",
-    "status": true
-  },
-  {
     "id": 2,
     "title": "Lamborghini",
     "description": "Aventador",
@@ -75,5 +64,9 @@
     "stock": 54,
     "category": "vehicles",
     "status": true
+  },
+  {
+    "id": 7,
+    "code": 72.97001109049455
   }
 ]
