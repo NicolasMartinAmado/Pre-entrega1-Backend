@@ -1,16 +1,22 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import ProductPages from './pages/PageProducto'
 
-import './App.css'
+import TopNavbar from './components/Navbar/TopNavbar'
 
 function App() {
 
   return (
-    <>
-      <h1>Ecommerce</h1>
-      <ProductPages />
-    </>
+
+      <BrowserRouter>
+        <TopNavbar />
+        <Routes>
+          <Route path='/' element={<ProductPages />} />
+        </Routes>
+      </BrowserRouter>
+
   )
 }
 

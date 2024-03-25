@@ -8,7 +8,7 @@ const managerProduct = new ProductManager(`./producto.json`);
 
 router.get(`/`, (req, res) => {
     res.render(
-        `index`,
+        `login`,
         {
             title: "Mercado E-commerce",
             name: "mercado amado",
@@ -31,6 +31,7 @@ router.get(`/home`, async (req, res) => {
         }
     )
 })
+router.get(`/api/sessions`,   )
 
 router.get(`/realtimeproducts`, async (req, res) => {
 const productos = await managerProduct.getProducts()

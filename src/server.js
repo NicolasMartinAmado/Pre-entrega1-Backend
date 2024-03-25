@@ -2,29 +2,43 @@ const handlebars = require(`express-handlebars`);
 const productsRouter = require(`./routes/apis/products.router.js`);
 const apicarts = require(`./routes/apis/carts.routes.js`);
 const viewsRouter = require(`./routes/views.router.js`);
-const userRouter = require('./routes/apis/users.router.js')
+const userRouter = require('./routes/apis/users.router.js');
 const express = require(`express`);
 const { Server } = require(`socket.io`);
 const { connect } = require('mongoose');
-const sessionsRouter = require('./routes/apis/sessions.router.js')
+const sessionsRouter = require('./routes/apis/sessions.router.js');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const mongoStore = require('connect-mongo');
+const { session } = require('passport');
+const { addLogger } = require('./utils/logger.js');
+
+
 const app = express();
 const port = 8080 || process.env.port;
-
-
-
-
-const connectdb = async () => {await connect(`mongodb+srv://nikiamado123:44871024Niki@proyectobackend.zqmzfsc.mongodb.net/project1?retryWrites=true&w=majority`);
-console.log(`base de datos conectada`)
-}
-
-connectdb()
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+app.use(cookieParser());
+app.use(cors());
 
+app.use(
+  session({
+    store: mongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 150000000,
+    }),
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+  }),
+); 
+app.use(addLogger);
 
 app.engine(
   'hbs',
@@ -39,9 +53,9 @@ app.engine(`hbs`, handlebars.engine());
 
 app.use(`/api/products`, productsRouter);
 app.use(`/api/carts`, apicarts);
-app.use('/api/users', userRouter)
+app.use('/api/users', userRouter);
+app.use('/api/sessions', sessionsRouter);
 app.use('/', viewsRouter);
-app.use('/api/sessions', sessionsRouter)
 
 app.get(`/single`, (req, res) => {
   res.send('archivo subido');
