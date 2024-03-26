@@ -106,7 +106,7 @@ class SessionController {
                 res.cookie('token', token, {
                     maxAge: 60*60*1000*24,
                     httpOnly: true,
-                }).redirect('/products')
+                }).redirect('/producto')
             }
             else{
     

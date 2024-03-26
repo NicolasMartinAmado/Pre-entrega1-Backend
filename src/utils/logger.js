@@ -23,7 +23,7 @@ const logger = winston.createLogger({
     levels: customLevelOptions.levels,
     transports: [
         new winston.transports.Console({
-            level: process.env.PORT === 8080 ? 'info' : 'debug',
+            level: process.env.port === 8080 ? 'info' : 'debug',
             format: winston.format.combine(
                 winston.format.colorize({ colors: customLevelOptions.colors }),
                 winston.format.simple()

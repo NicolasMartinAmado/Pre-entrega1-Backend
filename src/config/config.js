@@ -5,14 +5,14 @@ const { logger } = require('../utils/logger')
 
 
 const { mode } = program.opts()
-//logger.info('mode config: ', mode)
+
 
 dotenv.config({
     path: mode === 'production' ? './.env.production' : './.env.development' 
 })
 
 const configObject = {
-    PORT: process.env.PORT || 8080,
+    port: process.env.port || 8080,
     mongo_uri: process.env.MONGO_URI,
     jwt_secret_key: process.env.JWT_SECRET_KEY,
     persistence: process.env.PERSISTENCE,
