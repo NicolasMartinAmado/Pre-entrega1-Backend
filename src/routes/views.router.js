@@ -1,50 +1,44 @@
-const {Router} = require(`express`)
-const viewsController = require('../controllers/views.controllers')
+import { Router } from "express";
+
+import ProductCRouter from "./products.router.js";
+import MessagesCRouter from "./messages.router.js";
+import CartCRouter from "./carts.router.js";
+import UserCRouter from "./users.router.js";
+import sessionsRoute from "./session.router.js";
+import mailRoute from "./mail.router.js";
+import dirname from '../utils/dirname.js'
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
+
 const router = Router()
 
-const { isAdminOrPremium, isUser } = require('../middlewars/roleVerification')
-const { isAuthenticated } = require('../middlewars/auth.middleware')
+const swaggerOptions = {
+  definition: {
+      openapi: '3.0.1',
+      info: {
+          title: 'Documentación de app BackEndJs',
+          description: 'Api Docs para BackEndJs'
+      }
+  },
+  apis: [`${dirname}/docs/**/*.yaml`]
+}
 
+const specs = swaggerJsDoc(swaggerOptions)
+router.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
-const {
-    home,
-    realTimeProducts,
-    chat,
-    products,
-    productsDetails,
-    login,
-    register,
-    shoppingCart,
-    resetPasswordView,
-    sendResetEmail,
-    resetPassword
-} = new viewsController()
-
-router.get('/', home)
-
-router.get('/realtimeProducts', isAdminOrPremium, realTimeProducts)
-
-router.get('/chat',isUser , chat)
-
-router.get('/products', products)
-
-router.get('/products/details/:pid', productsDetails)
-
-router.get('/login', login)
-
-router.get('/register', register)
-
-router.get('/cart', isAuthenticated, shoppingCart)
-
-router.get('/reset-password', resetPasswordView)
-
-router.post('/reset-password', sendResetEmail)
-
-router.get('/reset-password:token', resetPasswordView)
-
-router.post('/reset-password:token', resetPassword)
+// definiendo las API
+router.use('/api/products', (new ProductCRouter()).getRouter())
+router.use('/api/carts', (new CartCRouter()).getRouter())
+router.use('/api/sessions', sessionsRoute);
+router.use('/api/messages', (new MessagesCRouter()).getRouter())
+router.use('/api/mail', mailRoute)
+router.use('/api/users', (new UserCRouter()).getRouter());
 
 
 
+router.use('*', (req, res) => res.status(404).send('Not Found'))
+router.use((err, req, res) => {
+  req.logger.error(err)
+  res.status(500).json({message: "Error Server", err})})
 
-module.exports= router
+export default router;

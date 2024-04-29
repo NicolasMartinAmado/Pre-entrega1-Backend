@@ -1,48 +1,16 @@
-const { logger } = require("../../utils/logger")
-const { userModel } = require("../../models/users.models")
+import DaoMongo from "./custom.dao.mongo.js";
+import usersModel from "../../models/users.models.js";
+import CartDaoMongo from "./cartdaomongo.js";
 
-class UserDaoMongo {
-    constructor(){
-        this.userModel = userModel
-    }
+const cartsService = new CartDaoMongo();
 
-    async get() {
-        return await this.userModel.find({})
-    }
+export default class UserDaoMongo  extends DaoMongo{
+  constructor() {
+    super (usersModel);
+  }
 
-    async getBy(filter) {
-        return await this.userModel.findOne(filter)
-    }
-
-    async create(newUser) {
-        return await this.userModel.create(newUser)
-    }
-
-    async update(uid, userUpdate) {
-        return await this.userModel.findOneAndUpdate({_id: uid}, userUpdate)
-    }
-
-    async updateRole(userId, newRole){
-        try{
-            return await this.userModel.findByIdAndUpdate(userId, { role: newRole }, { new: true })
-        }catch (err){
-            logger.error('Error updating user role:', err)
-        }
-    }
-
-    async updatePassword(uid, newPassword) {
-        try {
-            return await this.userModel.findByIdAndUpdate(uid, { password: newPassword }, { new: true })
-        } catch (error) {
-            logger.error('Error updating user password:', error)
-        }
-    }
-
-    async delete(uid) {
-        return await this.userModel.findOneAndDelete({_id: uid})
-    }
-
-
+  create = async (newUser) => {
+    newUser.cart = await cartsService.create();
+    await this.model.create(newUser)
+  }
 }
-
-module.exports = UserDaoMongo
