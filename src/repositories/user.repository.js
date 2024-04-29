@@ -1,5 +1,6 @@
 class UserRepository {
     constructor(dao){
+        
         this.dao = dao
     }
 

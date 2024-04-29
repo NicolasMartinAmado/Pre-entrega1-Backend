@@ -10,7 +10,7 @@ let CartFile
 
 switch (configObject.persistence) {
     case 'MONGO':
-        const UserDaoMongo = require('./mongo/usersDaoMongo')
+        const UserDaoMongo = require('./mongo/userDaoMongo')
         UserDao = UserDaoMongo
 
         const ProductDaoMongo = require('./mongo/productDaoMongo')
@@ -45,3 +45,8 @@ module.exports = {
     ProductFile,
     CartFile,
 }
+
+
+
+
+

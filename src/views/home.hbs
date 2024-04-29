@@ -24,7 +24,15 @@
       {{/each}}
     </div>
   </div>
-
+  <div class="text-center" style="margin-top: 20px">
+        {{#if hasPrevPage}}
+            <a href="/?pageNumber={{prevPage}}" class="btn btn-dark" style="margin-right: 10px">Prev</a>
+        {{/if}}
+        <span class="page-number" style="margin-right: 10px">{{page}}</span>
+        {{#if hasNextPage}}
+            <a href="/?pageNumber={{nextPage}}" class="btn btn-dark">Next</a>
+        {{/if}}
+    </div>
     
     <div>
         <hr>

@@ -18,7 +18,7 @@ const initializePassport = () => {
 
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: extract_jwt.fromExtractors([cookieExtractor]),
-        secretOrKey: 'palabrasecretaparaeltoken'
+        secretOrKey: 'palabrasecretatoken'
     }, async (jwt_payload, done)=>{
         try {
             logger.info('jwt_payload passport config: ', jwt_payload)

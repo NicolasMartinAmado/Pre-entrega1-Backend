@@ -1,22 +1,35 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const usersCollection = 'Usuarios'
-
-const UsersSchema = Schema({
+const userSchema = new Schema({
     first_name: {
         type: String,
         required: true
     },
-    last_name: String,
+    last_name: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+    },
     email: {
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    cart: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cart',
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'user', 'premium'],
+        required: true
     }
 })
 
-const usersModel = model(usersCollection, UsersSchema)
-
-module.exports = {
-    usersModel
-}
+exports.userModel = model('users', userSchema)

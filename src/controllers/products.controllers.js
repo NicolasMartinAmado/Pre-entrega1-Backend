@@ -1,8 +1,9 @@
-const { productService } = require('../repositories/service')
+const  productService  = require('../repositories/service.js')
 const customError = require('../services/errors/customError')
 const { EErrors } = require('../services/errors/enum')
 const { generateProductErrorInfo } = require('../services/errors/generateErrorInfo')
 const { logger } = require('../utils/logger')
+
 
 class ProdcutsController {
     constructor(){
@@ -11,6 +12,7 @@ class ProdcutsController {
 
     getProducts = async (req,res)=>{
         try{
+            
             const products = await this.productService.getProducts()
             return res.json({
                 status: 'succes',

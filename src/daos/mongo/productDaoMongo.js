@@ -1,7 +1,7 @@
 const { logger } = require("../../utils/logger")
 const { productModel } = require("../../models/products.model")
 
-class productDaoMongo {
+class ProductDaoMongo {
     constructor(){
         this.model = productModel
     }
@@ -111,4 +111,4 @@ class productDaoMongo {
 
 }
 
-module.exports = productDaoMongo
+module.exports = ProductDaoMongo

@@ -1,7 +1,9 @@
-const { productService, userService, cartService } = require('../repositories/service')
-const { logger } = require('../utils/logger')
-const { sendPasswordResetEmail, verifyResetToken } = require('../utils/ressetpassword')
-const { createHash, isValidPassword } = require('../utils/hashPassword')
+const { logger }= require ('../utils/logger')
+const { productService, userService, cartService } = require  ('../repositories/service.js')
+const  { sendPasswordResetEmail, verifyResetToken } = require ('../utils/ressetpassword')
+const { createHash, isValidPassword } = require ('../utils/hashPassword')
+
+
 
 
 
@@ -11,26 +13,33 @@ class ViewsController {
         this.userViewService = userService
         this.cartViewService = cartService
     }
-
     home = async (req, res) => {
+     
         try{
-            const { limit, pageNumber, sort, query } = req.query
+           
+            
             const parsedLimit = limit ? parseInt(limit, 10) : 10
             const userId = req.session && req.session.user ? req.session.user.user : null
             const user = await this.userViewService.getUserBy({ _id: userId })
-            const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
-            //console.log(docs)
-            res.render('home', {
-                title: 'Home',
-                user,
-                docs,
-                hasPrevPage,
-                hasNextPage,
-                prevPage,
-                nextPage,
-                page
-            })
+            const { hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
+           
+    res.render(
+        `home`,
+        {
+            title: "Mercado",
+            user,
+            hasPrevPage,
+            hasNextPage,
+            prevPage,
+            nextPage,
+            page,
+            
+          
+        }
+    )
+           
         }catch(err){
+           
             logger.error(err)
             res.status(500).send({message:'Server error'})
         }
@@ -43,8 +52,8 @@ class ViewsController {
             const userId = req.session && req.session.user ? req.session.user.user : null
             const user = await this.userViewService.getUserBy({ _id: userId })
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
-            //console.log(docs)
-            res.render('realTimeProducts', {
+           
+            res.render('realtimeproducts', {
                 title: 'Real Time',
                 user,
                 docs,
@@ -84,7 +93,7 @@ class ViewsController {
             //console.log('User data:', user)
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
             //console.log(docs)
-            res.render('productsView', {
+            res.render('products', {
                 title: 'Products View',
                 user,
                 docs,
@@ -221,4 +230,4 @@ class ViewsController {
 
 }
 
-module.exports = ViewsController
+module.exports= ViewsController

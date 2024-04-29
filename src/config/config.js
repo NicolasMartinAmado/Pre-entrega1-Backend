@@ -22,7 +22,7 @@ const configObject = {
 
 const connectDb = async () => {
     try {
-        await connect(process.env.MONGO_URI) 
+        await connect(`mongodb://127.0.0.1:27017/DBBACKEND`) 
         MongoSingleton.getInstance()
         logger.info("Db connected")
     } catch(err) {
@@ -34,7 +34,7 @@ const connectDb = async () => {
 class MongoSingleton {
     static instance 
     constructor() {
-      connect(process.env.MONGO_URI)
+      connect(`mongodb://127.0.0.1:27017/DBBACKEND`)
     }
   
     static getInstance() {

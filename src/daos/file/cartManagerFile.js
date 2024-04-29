@@ -3,7 +3,7 @@ const { logger } = require('../../utils/logger')
 
 class CartManager {
     constructor() {
-        this.path = "./mockDB/cart.json"
+        this.path = "../mockDb/cart.json"
         this.cart = []
         this.loadCart()
     }

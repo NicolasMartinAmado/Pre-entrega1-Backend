@@ -1,49 +1,50 @@
 const {Router} = require(`express`)
+const viewsController = require('../controllers/views.controllers')
 const router = Router()
-const ProductManager = require('../ProductManager');
-const managerProduct = new ProductManager(`./producto.json`);
+
+const { isAdminOrPremium, isUser } = require('../middlewars/roleVerification')
+const { isAuthenticated } = require('../middlewars/auth.middleware')
+
+
+const {
+    home,
+    realTimeProducts,
+    chat,
+    products,
+    productsDetails,
+    login,
+    register,
+    shoppingCart,
+    resetPasswordView,
+    sendResetEmail,
+    resetPassword
+} = new viewsController()
+
+router.get('/', home)
+
+router.get('/realtimeProducts', isAdminOrPremium, realTimeProducts)
+
+router.get('/chat',isUser , chat)
+
+router.get('/products', products)
+
+router.get('/products/details/:pid', productsDetails)
+
+router.get('/login', login)
+
+router.get('/register', register)
+
+router.get('/cart', isAuthenticated, shoppingCart)
+
+router.get('/reset-password', resetPasswordView)
+
+router.post('/reset-password', sendResetEmail)
+
+router.get('/reset-password:token', resetPasswordView)
+
+router.post('/reset-password:token', resetPassword)
 
 
 
 
-router.get(`/`, (req, res) => {
-    res.render(
-        `login`,
-        {
-            title: "Mercado E-commerce",
-            name: "mercado amado",
-            style : `../index.css`,
-            scriptView:'./js/index.js' 
-            
-        }
-    )
-})
-router.get(`/home`, async (req, res) => {
-    const productos = await managerProduct.getProducts()
-    res.render(
-        `home`,
-        {
-            title: "Mercado",
-            productos,
-            name: "PRODUCTOS",
-            style : `./home.css`,
-            scriptView:'./js/home.js' 
-        }
-    )
-})
-router.get(`/api/sessions`,   )
-
-router.get(`/realtimeproducts`, async (req, res) => {
-const productos = await managerProduct.getProducts()
-
-res.render(
-    `realtimeproducts`,{
-        title: "Products",
-        productos,
-            name: "PRODUCTOS",
-            style : `../index.css`,
-            scriptView:'./js/realtimeproducts.js' 
-    }
-)
-})
 module.exports= router

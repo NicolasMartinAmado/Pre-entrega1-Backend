@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const path = './src/mockDB/Productos.json'
+const path = '../mockDb/productos.json'
 
 class ProductManagerFile{
     constructor(){
@@ -21,7 +21,7 @@ class ProductManagerFile{
         try {
             return await this.readFile()
         } catch (error) {
-            return 'No se hay productos'
+            return 'No hay productos'
         }
     }
 
