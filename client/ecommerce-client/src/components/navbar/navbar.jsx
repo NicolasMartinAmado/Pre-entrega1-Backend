@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../../context/UserContext';
+import { useUserContext } from '../../context/ContextUser';
 
 const TopNavbar = () => {
     const { token, setToken, setUser, user } = useUserContext();
@@ -34,7 +34,7 @@ const TopNavbar = () => {
         <nav className="bg-white shadow-md">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div className="flex items-center">
-                    <Link to="/" className="text-2xl font-semibold text-[#8ed37f] hover:bg-[#8ed37f] hover:text-white px-2 py-1 rounded-md">El Club del Juego</Link>
+                    <Link to="/" className="text-2xl font-semibold text-[#8ed37f] hover:bg-[#8ed37f] hover:text-white px-2 py-1 rounded-md">Messi Ecommerce</Link>
                     <div className="ml-6 space-x-4">
                         <Link to="/" className="text-black hover:text-gray-600">Inicio</Link>
                         <Link to="/chat" className="text-black hover:text-gray-600">Chat</Link>
