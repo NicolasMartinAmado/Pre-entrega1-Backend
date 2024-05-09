@@ -1,70 +1,117 @@
-const fs = require('fs')
+const fs = require('fs');
+const { logger } = require('../../utils/logger');
+const { error } = require('console');
 
-const path = '../mockDb/productos.json'
-
-class ProductManagerFile{
-    constructor(){
-        this.path = path
+class ProductManager {
+    constructor() {
+        this.path = "../mockDB/products.json";
+        this.products = [];
+        this.loadProducts();
     }
 
-    readFile = async () => {
+    async loadProducts() {
         try {
-            const data = await fs.promises.readFile(this.path, 'utf-8')
-            console.log(data)
-            return JSON.parse(data)            
+          const productsInJson = await fs.promises.readFile(this.path, "utf-8");
+          this.products = JSON.parse(productsInJson);
         } catch (error) {
-            return []
-        }        
-    }
-
-    getProducts = async () => {
-        try {
-            return await this.readFile()
-        } catch (error) {
-            return 'No hay productos'
+          console.error("Error loading products:", error);
         }
     }
 
-    
-    getProductById = async (id) => {
+    async writeProductsToFile() {
         try {
-            const products = await this.readFile()
-            return products.find(product => product.id === id)                     
+          const productsJson = JSON.stringify(this.products, null, 2);
+          await fs.promises.writeFile(this.path, productsJson);
         } catch (error) {
-            return  new Error(error)
+          console.error("Error writing products to file:", error);
         }
     }
-    
-    
-    addProduct = async (newItem) => {
-        try {   
-            
-            let products = await this.readFile()
-    
-            const productDb = products.find(product => product.code === newItem.code)
-            console.log(productDb)
-            if (productDb) {
-                return `Se encontro el producto`
+
+    async addProduct(title, description, price, thumbnail, code, stock, status, category) {
+
+        let id = 0;
+        for (let i = 0; i < this.products.length; i++) {
+            const element = this.products[i];
+            if(element.id > id){
+                id = element.id;
             }
+        }
+        id++;
 
-    
-           
-            if (products.length === 0 ) {
-                newItem.id = 1
-                products.push(newItem) 
-            } else {
-                products =  [...products, {...newItem, id: products[products.length - 1].id + 1 } ]
+        if(this.products.find(product => product.code === code)){
+            logger.info("This product has already been added");
+        }
+        else{
+            if(!title || !description || !price || !code || !stock){
+                logger.info("Incorrect product: One of these properties is not valid");
             }
-
-            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8')
-
-            return 'Producto agregado'
-        } catch (error) {
-            return new Error(error)
+            else{
+                this.products.push({id: id, title, description, price, thumbnail, code, stock, status, category});
+                await this.writeProductsToFile()
+            }
         }
     }
-    
+
+    async getProducts() {
+
+        return this.products
+    }
+
+    async getLimitedProducts(limit) {
+
+        if (parseInt(limit) <= 0) {
+            logger.error("Invalid limit");
+            return [];
+        } else {
+            return this.products.slice(0, parseInt(limit));
+        }
+    }
+
+    async getProductById(id) {
+
+        const filteredProduct = this.products.filter(product => product.id === parseInt(id));
+        if(filteredProduct.length !== 0){
+            return filteredProduct;
+        }
+        else{
+            logger.error("This product does not exist");
+            return [];
+        }
+        
+    }
+
+    async updateProduct(id, title, description, price, thumbnail, code, stock, status, category){
+        const existingProductIndex = this.products.findIndex(product => product.id === parseInt(id));
+
+    if (existingProductIndex !== -1) {
+        this.products[existingProductIndex] = {
+            ...this.products[existingProductIndex],
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock,
+            status,
+            category
+        };
+
+        await this.writeProductsToFile();
+        }
+        else{
+            logger.error("The product to be updated was not found")
+        }
+    }
+
+    async deleteProduct(id){
+        const indexToDelete = this.products.findIndex((product)=> product.id === parseInt(id));
+        if(indexToDelete!==-1){
+            this.products.splice(indexToDelete, 1);
+            await this.writeProductsToFile();
+        }else{
+            logger.error('No such product exists')
+        }
+    }
 }
 
-
-module.exports = ProductManagerFile
+module.exports = ProductManager;
