@@ -17,28 +17,29 @@ const handlebarsHelpers = require('handlebars-helpers')();
 const eq = handlebarsHelpers.eq;
 
 const app = express();
-const port = 8080 || process.env.port;
+const port = 8080
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
-app.use(cors());
-app.use(
-  session({
-    store: mongoStore.create({
-      mongoUrl: `mongodb://127.0.0.1:27017/DBBACKEND`,
-      mongoOptions: {
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
+app.use(session({
+  store: mongoStore.create({
+    mongoUrl: process.env.MONGO_URI, 
+    mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-      },
-      ttl: 15000000000,
-    }),
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
+    },
+    ttl: 15000000000,
   }),
-);
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}))
 
 initializePassport();
 app.use(passport.initialize());

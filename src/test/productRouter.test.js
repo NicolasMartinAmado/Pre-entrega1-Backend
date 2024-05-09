@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http')
 const { expect } = chai
 chai.use(chaiHttp)
 
-const app = require('../app')
+const app = require('../server')
 const { productDaoMongo } = require('../daos/mongo/productDaoMongo')
 const { ProductRepository } = require('../repositories/product.repository')
 const { ProdcutsController } = require('../controllers/products.controllers')

@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const { cartService, userService, productService } = require('../repositories/service')
 const { ticketModel } = require('../models/tickets.model')
@@ -102,7 +103,7 @@ class CartController {
             }
         } catch (error) {
             next(error)
-            
+            //res.status(500).send('Server error')
         }
     }
 
@@ -187,14 +188,23 @@ class CartController {
                     message: 'Error trying add product to cart',
                     code: EErrors.DATABASE_ERROR
                 })
-          
+                /* return res.status(404).json({
+                    status: 'error',
+                    message: 'User not found or user does not have a cart',
+                }) */
+            }
 
             if (user.role === 'premium') {
-               
                 const productInfo = await this.productService.getProductById(pid)
+                
+                if (!productInfo) {
+                    return res.status(404).json({
+                        status: 'error',
+                        message: 'Product not found',
+                    })
+                }
     
-             
-                if (productInfo.owner === user.email) {
+                if (productInfo.owner.toString() === user._id.toString()) {
                     return res.status(403).json({
                         status: 'error',
                         message: 'Unauthorized to add this product to your cart',
@@ -209,9 +219,12 @@ class CartController {
                 status: 'success',
                 message: 'Product added to cart successfully',
             })
-        } }catch (error) {
+        } catch (error) {
             next(error)
-          
+            /* res.status(500).json({
+                status: 'error',
+                message: 'Server error',
+            }) */
         }
     }
 
@@ -276,7 +289,7 @@ class CartController {
                 await cart.save()
             } else {
                 await this.cartService.deleteAllProducts(cid)
-                logger.info('empty')
+                logger.info('----------Cart empty----------')
             }
             try {
                 await Promise.all(productUpdates)

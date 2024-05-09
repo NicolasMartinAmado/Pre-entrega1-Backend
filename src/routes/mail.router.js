@@ -1,12 +1,12 @@
-import { Router } from "express";
-import MailController from "../../controller/mail.controller.js";
-import { handleAuth } from "../../middleware/handlePoliciesPASP.js";
+const { Router } = require('express')
+const { sendMail } = require('../utils/sendEmail')
 
-const router = Router();
-const sControl = new MailController()
+const router = Router()
 
-// http://localhost:PORT/api/mail/
-router
-  .post('/send',  handleAuth(['USER']), sControl.send)
+router.get('/mail', (req, res) => {
+    sendMail()
+    res.send('mail sent')
+})
 
-export default router;
+
+module.exports = router

@@ -1,20 +1,39 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-export const ContextUser = createContext()
+export const UserContext = createContext()
 
 const tokenPrevio = JSON.parse(localStorage.getItem("token"))
+const userPrevio = JSON.parse(localStorage.getItem("user"))
 
-const UserProvider = ({children}) => {
-  const [user, setUser] = useState({})
-  const [token, setToken] = useState(tokenPrevio)
+export const useUserContext = () => {
+  const context = useContext(UserContext)
+  if (!context) {
+    throw new Error("useUserContext must be used within an UserProvider")
+  }
+  return context
+};
 
-  useEffect (() => {localStorage.setItem("token", JSON.stringify(token))}, [token])
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(userPrevio || {})
+  const [token, setToken] = useState(tokenPrevio || '')
+
+  useEffect (() => {
+    localStorage.setItem("token", JSON.stringify(token))
+    localStorage.setItem("user", JSON.stringify(user))
+  }, [token, user])
+
+
 
   return (
-    <ContextUser.Provider value={{user, setUser, token, setToken}}>
+    <UserContext.Provider value={{
+      user,
+      setUser,
+      token,
+      setToken
+    }}>
       {children}
-    </ContextUser.Provider>
-  )
-}
+    </UserContext.Provider>
+  );
+};
 
 export default UserProvider

@@ -3,18 +3,18 @@ GET http://localhost:4000/api/products
 ###
 GET http://localhost:4000/api/products/1
 ###
-POST http://localhost:8080/api/products
+POST http://localhost:8080/api/products/
 
 Content-Type: application/json
-{   
-    "title": "Lamborghini",
-    "description": "Spider",
-    "price": 10000000,
-    "thumbnail": "../",
-    "code": 3,
-    "stock": 2,
-    "category": "vehicles",
-    "status": true
+{       "title":"algo prueba",
+                "description":"algo prueba",
+                "price":4564561236,
+                "thumbnail":"algo ",
+                "code":45456456,
+                "stock":2,
+                "status":true,
+                "category":"algo ",
+                "owner":"algo ", 
 }
 ###
 
@@ -39,6 +39,6 @@ POST http://localhost:8080/api/sessions/register
 PUT  http://localhost:4000/api/products/11
 
 ###
-DELETE http://localhost:8080/api/products/1
+DELETE http://localhost:8080/api/products/4
 
 

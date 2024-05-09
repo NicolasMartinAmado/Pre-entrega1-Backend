@@ -1,12 +1,12 @@
 
-import passport from "passport";
-import UsersController from "../controller/users.controller.js";
+const passport = require ("passport");
+const UsersController = require ("../controllers/user.controllers");
 
 const uControl = new UsersController();
 
 // ? AUTH JWT BEARER - PASSPORT
 
-export const handleAuth = (policies) => {
+ const handleAuth = (policies) => {
   // Policies => ['PUBLIC', 'USER', 'USER_PREMIUM', 'ADMIN']
   return async (req, res, next) => {
     try {
@@ -28,4 +28,4 @@ export const handleAuth = (policies) => {
     }
   };
 };
-
+module.exports = {handleAuth , uControl}

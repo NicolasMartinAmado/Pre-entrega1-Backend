@@ -1,4 +1,4 @@
-import CustomError from "../services/errors/customError";
+const CustomError = require ("../services/errors/customError");
 
 const validateFields = (fields, requiredFields) => {
   const missingFields = [];
@@ -17,4 +17,4 @@ const validateFields = (fields, requiredFields) => {
   return correctObject;
 };
 
-export default validateFields;
+module.exports = validateFields;

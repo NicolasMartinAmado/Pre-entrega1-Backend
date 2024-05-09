@@ -1,16 +1,63 @@
-import DaoMongo from "./custom.dao.mongo.js";
-import usersModel from "../../models/users.models.js";
-import CartDaoMongo from "./cartdaomongo.js";
 
-const cartsService = new CartDaoMongo();
+const { logger } = require("../../utils/logger")
+const { userModel } = require("../../models/users.models")
 
-export default class UserDaoMongo  extends DaoMongo{
-  constructor() {
-    super (usersModel);
-  }
+class userDaoMongo {
+    constructor(){
+        this.userModel = userModel
+    }
 
-  create = async (newUser) => {
-    newUser.cart = await cartsService.create();
-    await this.model.create(newUser)
-  }
+    async get() {
+        return await this.userModel.find({})
+    }
+
+    async getBy(filter) {
+        return await this.userModel.findOne(filter)
+    }
+
+    async create(newUser) {
+        return await this.userModel.create(newUser)
+    }
+
+    async update(uid, userUpdate) {
+        return await this.userModel.findOneAndUpdate({_id: uid}, userUpdate)
+    }
+
+    async updateRole(userId, newRole){
+        try{
+            return await this.userModel.findByIdAndUpdate(userId, { role: newRole }, { new: true })
+        }catch (err){
+            logger.error('Error updating user role:', err)
+        }
+    }
+
+    async updatePassword(uid, newPassword) {
+        try {
+            return await this.userModel.findByIdAndUpdate(uid, { password: newPassword }, { new: true })
+        } catch (error) {
+            logger.error('Error updating user password:', error)
+        }
+    }
+
+    async delete(uid) {
+        return await this.userModel.findOneAndDelete({_id: uid})
+    }
+
+    async findInactive(dateThreshold) {
+        try {
+            const inactiveUsers = await this.userModel.find({
+                last_connection: { $lt: dateThreshold }
+            })
+
+            return inactiveUsers
+        } catch (error) {
+            logger.error('Error finding inactive users:', error)
+            throw new Error('Error finding inactive users')
+        }
+    }
+
+
+
 }
+
+module.exports = userDaoMongo

@@ -1,44 +1,55 @@
-import { Router } from "express";
+const { Router } = require('express')
+const ViewsController = require('../controllers/views.controller')
+const { isAdminOrPremium, isUser, isAdmin } = require('../middlewars/roleverification')
+const { isAuthenticated } = require('../middlewars/auth.middleware')
 
-import ProductCRouter from "./products.router.js";
-import MessagesCRouter from "./messages.router.js";
-import CartCRouter from "./carts.router.js";
-import UserCRouter from "./users.router.js";
-import sessionsRoute from "./session.router.js";
-import mailRoute from "./mail.router.js";
-import dirname from '../utils/dirname.js'
-import swaggerJsDoc from "swagger-jsdoc";
-import swaggerUiExpress from "swagger-ui-express";
 
 const router = Router()
 
-const swaggerOptions = {
-  definition: {
-      openapi: '3.0.1',
-      info: {
-          title: 'Documentación de app BackEndJs',
-          description: 'Api Docs para BackEndJs'
-      }
-  },
-  apis: [`${dirname}/docs/**/*.yaml`]
-}
+const {
+    home,
+    realTimeProducts,
+    chat,
+    products,
+    productsDetails,
+    login,
+    register,
+    shoppingCart,
+    resetPasswordView,
+    sendResetEmail,
+    resetPassword,
+    resetPasswordViewToken,
+    adminView
+} = new ViewsController()
 
-const specs = swaggerJsDoc(swaggerOptions)
-router.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+router.get('/', home)
 
-// definiendo las API
-router.use('/api/products', (new ProductCRouter()).getRouter())
-router.use('/api/carts', (new CartCRouter()).getRouter())
-router.use('/api/sessions', sessionsRoute);
-router.use('/api/messages', (new MessagesCRouter()).getRouter())
-router.use('/api/mail', mailRoute)
-router.use('/api/users', (new UserCRouter()).getRouter());
+router.get('/realTimeProducts', isAdminOrPremium, realTimeProducts)
 
+router.get('/chat',isUser , chat)
 
+router.get('/products', products)
 
-router.use('*', (req, res) => res.status(404).send('Not Found'))
-router.use((err, req, res) => {
-  req.logger.error(err)
-  res.status(500).json({message: "Error Server", err})})
+router.get('/products/details/:pid', productsDetails)
 
-export default router;
+router.get('/login', login)
+
+router.get('/register', register)
+
+router.get('/cart', isAuthenticated, shoppingCart)
+
+router.get('/reset-password', resetPasswordView)
+
+router.post('/reset-password', sendResetEmail)
+
+router.get('/reset-password', resetPasswordViewToken)
+
+router.post('/reset-password', resetPassword)
+
+router.get('/admin', isAdmin, adminView)
+
+/* router.get('/logout', async (req,res) =>{
+    res.render('login')
+}) */
+
+module.exports = router

@@ -1,69 +1,96 @@
-import { useForm } from "react-hook-form";
-import useSwalAlert from "../hook/useSwalAlert.jsx";
-import useSessionService from "../services/UseSessionService.jsx";
+import { useForm } from 'react-hook-form'
+import { useUserContext } from '../context/ContextUser'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
-const Register = () => {
-  const { messageAndRedirect } = useSwalAlert()
-  const { sessionRegister } = useSessionService();
-  const { register, handleSubmit, getValues, formState: { errors, isDirty, isValid } } = useForm({
-    mode: "onBlur",
-    defaultValues: {
-      email: 'prueba123@gmail.com',
-      password: '12345'
-    },
-  });
-  
-  const onSubmit = async data => {
-    try {
-      const resp = await sessionRegister(data)
-      
 
-      if (resp?.isError === false) {
-        messageAndRedirect(resp.message, "success", "/login/")
-      } else {
-        messageAndRedirect(resp.message || "Error en el registro", "error")
-      }
-    } catch (error) {
-      
-      messageAndRedirect("Error en el registro debido a un problema en el sistema", "error")
-    }
-  };
-  
-    return (
-      <div className="page-container">
-        <h1 className="title">Registro</h1>
-        <form className="form-container-vert" onSubmit={handleSubmit(onSubmit)}>
+const RegisterPage = () => {
 
-        <label htmlFor="first_name">Nombre</label>
-        <input type="text" {...register("first_name", { required: true })} />
-        {errors.first_name && <p className="error-message">Este campo es requerido</p>}
+    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const { setToken, setUser } = useUserContext()
+    const navigate = useNavigate()
 
-        <label htmlFor="last_name">Apellido</label>
-        <input type="text" {...register("last_name", { required: true })} />
-        {errors.last_name && <p className="error-message">Este campo es requerido</p>}
-
-        <label htmlFor="birthday">Fecha de Nacimiento</label>
-        <input type="date" {...register("birthday", { required: true })} />
-        {errors.birthday && <p className="error-message">Este campo es requerido</p>
+    const onSubmit = async (data) => {
+        try {
+            const requestOptions = {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data),
+            };
+    
+            const res = await fetch('http://localhost:8080/api/session/register', requestOptions);
+            const resp = await res.json();
+    
+            console.log(resp);
+    
+            if (resp.status === 'success' && resp.payload && resp.payload.token) {
+                setToken(`Bearer ${resp.payload.token}`);
+                setUser(resp.payload)
+                Swal.fire({ icon: "success", text: resp.message || "Register successful" })
+                    .then(() => navigate("/login", { replace: true }));
+            } else {
+                const errorMessage = resp.message || "Acceso no autorizado";
+                Swal.fire({ icon: "error", text: errorMessage });
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({ icon: "error", text: "Error en el sistema" });
         }
-        <label htmlFor="email">Email</label>
-        <input type="email" {...register("email", { required: true })} />
-        {errors.email && <p className="error-message">Este campo es requerido</p>}
+    }
 
-        <label htmlFor="password">Contraseña</label>
-        <input type="password" {...register("password", { required: true })} />
-        {errors.password && <p className="error-message">Este campo es requerido</p>}
+  return (
+    <div className='bg-zinc-800 max-w-md p-10 rounded-md mx-auto mt-auto'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" {...register("first_name", {required: true})} 
+        className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+        placeholder='First Name'/>
+        {
+            errors.first_name && (<p className='text-red-500'>First name is required</p>)
+        }
+        <input type="text" {...register("last_name", {required: true})} 
+        className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+        placeholder='Last Name'/>
+        {
+            errors.last_name && (<p className='text-red-500'>Last name is required</p>)
+        }
+        <input type="date" {...register("date", {required: true})} 
+        className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my2'
+        placeholder='Date Name'/>
+        {
+            errors.date && (<p className='text-red-500'>Date is required</p>)
+        }
+        <input type="email" {...register("email", {required: true})} 
+        className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+        placeholder='Email'/>
+        {
+            errors.email && (<p className='text-red-500'>Email is required</p>)
+        }
+        <input type="password" {...register("password", {required: true})} 
+        className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+        placeholder='Password'/>
+        {
+            errors.password && (<p className='text-red-500'>Password is required</p>)
+        }
+        <select {...register("role", { required: true })} defaultValue="" className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'>
+          <option value="" disabled>Select one</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        {
+            errors.role && (<p className='text-red-500'>Role is required</p>)
+        }
+        <button type='submit' className='text-white bg-slate-400 py-2 px-4 rounded-md my-2 flex justify-center'>
+            Register
+        </button>
 
-        <label htmlFor="confirm_password">Confirmar Contraseña</label>
-        <input type="password" {...register("confirm_password", {
-            validate: value => value === getValues().password || "Las contraseñas no coinciden", })}
-        />
-        {errors.confirm_password && <p className="error-message">{errors.confirm_password.message}</p>}
-
-        <button type="submit" disabled={!isDirty || !isValid}>Registrarse</button>
+        <p className="flex gap-x-2 justify-between text-white">
+            Already have an account? <Link to={"/login"} className="text-sky-500">Log in</Link>
+        </p>
       </form>
     </div>
-  );
-};
-  
-  export default Register;
+
+  )
+}
+
+export default RegisterPage

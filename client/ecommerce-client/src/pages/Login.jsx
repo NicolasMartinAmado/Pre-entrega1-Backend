@@ -1,49 +1,77 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import useSwalAlert from "../hook/useSwalAlert.jsx";
-import useSessionService from "../services/UseSessionService.jsx";
+import { useForm } from "react-hook-form"
+import { useUserContext } from "../context/ContextUser"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import Swal from 'sweetalert2'
 
 
-const LogIn = () => {
-  const { sessionLogIn } = useSessionService();
-  const { messageAndRedirect } = useSwalAlert()
-  
-  const { register, handleSubmit } = useForm({
-    mode: "onBlur",
-    defaultValues: {
-      email: 'email@prueba.com',
-      password: '123456'
-    },
-  });
+const LoginPage = () => {
 
-  const onSubmit = async data => {
-    try {
-      const resp = await sessionLogIn(data)
+    const { register, handleSubmit, formState: { errors }} = useForm()
+    const { setUser, setToken } = useUserContext()
+    const navigate = useNavigate()
 
-      if(resp?.isError === false) {
-        messageAndRedirect(resp.message, "success", "/products/")
-      } else {
-        messageAndRedirect("Acceso no autorizado", "error")
-      }
-    } catch (error) {
-      console.error(error);
-      messageAndRedirect("Acceso no autorizado por un error en el sistema", "error")
+    const onSubmit = async (data) => {
+        try {
+            const requestOptions = {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data),
+            };
+    
+            const res = await fetch('http://localhost:8080/api/session/login', requestOptions);
+            const resp = await res.json();
+    
+            console.log(resp);
+    
+            if (resp.status === 'success' && resp.payload && resp.payload.token) {
+              
+                setToken(`Bearer ${resp.payload.token}`);
+                setUser(resp.payload)
+            
+                Swal.fire({ icon: "success", text: resp.message || "Login successful" })
+                    .then(() => navigate("/products", { replace: true }));
+            } else {
+              
+                const errorMessage = resp.message || "Acceso no autorizado";
+                Swal.fire({ icon: "error", text: errorMessage });
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({ icon: "error", text: "Error en el sistema" });
+        }
     }
-  };
+
+
 
   return (
-    <div  className="page-container">
-      <h1 className="title">Inicio de Sesión</h1>
-      <form className="form-container-vert" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">   Email</label>
-        <input type="email" {...register("email",    { required: true})} />
-        <label htmlFor="password">Contraseña</label>
-        <input type="password" {...register("password", { required: true})} />
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-      <Link to='/recovery' className="recovery-link">Recupera tu contraseña</Link>
+    <div className='bg-zinc-800 max-w-md p-10 rounded-md mx-auto mt-40'>
+
+        <h1 className="text-2xl font-bold text-white flex justify-center mb-2">Login</h1>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="email" {...register("email", {required: true})} 
+            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+            placeholder='Email'/>
+            {
+                errors.email && (<p className='text-red-500'>Email is required</p>)
+            }
+            <input type="password" {...register("password", {required: true})} 
+            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
+            placeholder='Password'/>
+            {
+                errors.password && (<p className='text-red-500'>Password is required</p>)
+            }
+            <button type='submit' className='mx-auto text-white bg-slate-400 py-2 px-4 rounded-md my-2 flex justify-center'>
+                Login
+            </button>
+
+            <p className="flex gap-x-2 justify-between text-white">
+                Don't have an account? <Link to={"/register"} className="text-sky-500">Sing Up</Link>
+            </p>
+        </form>
     </div>
   )
 }
 
-export default LogIn
+export default LoginPage

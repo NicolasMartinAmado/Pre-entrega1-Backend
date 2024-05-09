@@ -1,5 +1,6 @@
-import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
+const  { fileURLToPath } = require ('node:url');
+const  { dirname } = require ('node:path');
 
-const __filename = fileURLToPath(import.meta.url);
-export default dirname(dirname(__filename));
+//const __filenam = fileURLToPath(meta.url);//
+
+//module.exports= dirname(dirname(__filenam))//

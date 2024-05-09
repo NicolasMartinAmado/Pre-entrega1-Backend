@@ -1,30 +1,57 @@
+const { Router } = require('express')
+const passport = require('passport')
+const { passportCall } = require('../passport-jwt/passportCall.middleware')
+const { authorization } = require('../passport-jwt/authorization')
+const SessionController = require('../controllers/session.controllers')
+const { isAuthenticated } = require('../middlewars/auth.middleware')
+const { upload, uploadFields } = require('../utils/multer')
+const { isAdmin } = require('../middlewars/roleverification')
 
-import { Router } from "express";
-//import passport from "passport";
+const router = Router()
 
-import SessionsController from "../controllers/session.controllers.js";
-import { handleAuth } from "../middlewars/handlepoliciesPasp.js";
+const {
+    register,
+    login,
+    logout,
+    current,
+    github,
+    githubCallback,
+    toggleUserRole,
+    user,
+    uploadsMulter,
+    uploadsMulterView,
+    getAllUsers,
+    deleteInactiveUsers
+} = new SessionController()
 
 
-const router = Router();
-const sControl = new SessionsController();
+router.post('/register', register)
 
-// http://localhost:PORT/api/sessions/
-router
-  .post('/register', sControl.register)
-  .post('/login', sControl.login)
-  .get ('/logout', sControl.logout)
-  .get ('/user', handleAuth(['USER', 'USER_PREMIUM', 'ADMIN']), sControl.getUserSession)
-  .post('/userrecovery', sControl.userRecovery)
-  .put ('/userrecovery', handleAuth(["USER"]), sControl.userRecoveryPassword)
+router.post('/login', login)
 
-// TODO PRUEBAS
-router.get('/current', handleAuth(['ADMIN']), (req, res) => {
-  res.send({message: "Datos sensibles", reqUser: req.user})
+
+
+router.get('/logout', logout)
+
+router.get('/current', [passportCall('jwt'), authorization(['ADMIN', 'PUBLIC'])], current)
+
+router.get('/github', passport.authenticate('github', {scope: ['user:email']}), github)
+
+router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/login'}), githubCallback)
+
+router.get('/protected-route', isAuthenticated, (req, res) => {
+    res.json({ message: 'Protected route' })
 })
 
-// GITHUB API
-//router.get('/github', passport.authenticate('github', {scope:['user:email']}), sControl.github)
-//router.get('/githubcallback', passport.authenticate('github', {session: false, failureRedirect: '/'}), sControl.githubcallback)
+router.put('/premium/:uid', toggleUserRole)
 
-export default router;
+router.post('/:uid/documents', uploadFields, uploadsMulter)
+
+router.get('/:uid/upload-files', uploadsMulterView)
+
+router.get('/users', isAdmin , getAllUsers)
+
+router.delete('/', isAdmin, deleteInactiveUsers)
+
+router.get('/user/:uid', user)
+module.exports = router

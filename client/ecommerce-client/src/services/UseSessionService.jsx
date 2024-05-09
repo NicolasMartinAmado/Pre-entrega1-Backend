@@ -11,7 +11,7 @@ function useSessionService() {
 
   const sessionLogIn = async (element) => {
     try {
-      const response = await fetch(`${uriBase}api/sessions/login`, {
+      const response = await fetch(`${uriBase}api/session/login`, {
         method: "POST",
         headers,
         body: JSON.stringify(element),
