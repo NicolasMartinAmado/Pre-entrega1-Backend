@@ -7,22 +7,8 @@ let MessageDao
 let ProductFile
 let CartFile
 
-//console.log("Persistnece factory: ", configObject.persistence)
-
 switch (configObject.persistence) {
-    case 'MEMORY':
-        
-       
-
-    case 'FILE':
-        const ProductFileManager = require('./file/productManagerFile')
-        ProductFile = ProductFileManager
-
-        const CartFileManager = require('./file/cartManagerFile')
-        CartFile = CartFileManager
-        break;
-
-    default:
+    case 'MONGO':
         const UserDaoMongo = require('./mongo/userDaoMongo')
         UserDao = UserDaoMongo
 
@@ -34,11 +20,19 @@ switch (configObject.persistence) {
 
         const MessageDaoMongo = require('./mongo/messageDaoMongo')
         MessageDao = MessageDaoMongo
-        
+        break;
+
+    case 'FILE':
+        const ProductFileManager = require('./file/productManagerfile')
+        ProductFile = ProductFileManager
+
+        const CartFileManager = require('./file/cartManagerfile')
+        CartFile = CartFileManager
+        break;
+
+    default:
         break;
 }
-
-
 
 module.exports = {
     UserDao,
