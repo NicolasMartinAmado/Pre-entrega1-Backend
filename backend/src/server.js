@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://front-end-mern-ecommerce001.onrender.com',
+  origin: 'https://front-end-mern-s5rp.onrender.com',
   credentials: true
 }))
 app.use(session({
