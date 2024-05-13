@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useUserContext } from '../context/ContextUser'
@@ -14,7 +15,7 @@ const RealTimeProducts = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/products?pageNumber=${currentPage}`)
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${currentPage}`)
             const data = await response.json()
 
             setProducts(data.payload.docs)
@@ -61,7 +62,7 @@ const RealTimeProducts = () => {
             credentials: 'include'  
         }
         try{
-            const response = await fetch('http://localhost:8080/api/products', requestOptions)
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, requestOptions)
             console.log(response)
             if (!response.ok) {
                 const data = await response.json()
@@ -95,7 +96,7 @@ const RealTimeProducts = () => {
         }
         console.log("PID: ", pid)
         try{
-            const response = await fetch(`http://localhost:8080/api/products/${pid}`, requestOptions)
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/${pid}`, requestOptions)
             if (!response.ok) {
                 const data = await response.json()
                 alert(`Error deleting product: ${data.message}`)

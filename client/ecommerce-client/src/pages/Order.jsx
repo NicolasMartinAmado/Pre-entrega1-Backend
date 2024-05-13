@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 import { ContextConfig } from "../context/ContextConfig.jsx";
 import { ContextUser } from "../context/ContextUser.jsx";

@@ -2,7 +2,7 @@
 import { useContext, useEffect } from 'react';
 import { ContextUser } from '../context/ContextUser.jsx';
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const Logout = () => {
   const { setToken } = useContext(ContextUser);

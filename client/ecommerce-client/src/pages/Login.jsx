@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form"
 import { useUserContext } from "../context/ContextUser"
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2"
+
+
 
 
 const LoginPage = () => {
@@ -19,20 +20,17 @@ const LoginPage = () => {
                 body: JSON.stringify(data),
             };
     
-            const res = await fetch('http://localhost:8080/api/session/login', requestOptions);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/session/login`, requestOptions);
             const resp = await res.json();
     
             console.log(resp);
     
             if (resp.status === 'success' && resp.payload && resp.payload.token) {
-              
                 setToken(`Bearer ${resp.payload.token}`);
                 setUser(resp.payload)
-            
                 Swal.fire({ icon: "success", text: resp.message || "Login successful" })
                     .then(() => navigate("/products", { replace: true }));
             } else {
-              
                 const errorMessage = resp.message || "Acceso no autorizado";
                 Swal.fire({ icon: "error", text: errorMessage });
             }

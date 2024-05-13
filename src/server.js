@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const mongoStore = require('connect-mongo');
 const passport = require('passport');
 const { addLogger, logger } = require('./utils/logger.js');
-const { connectDb } = require('./config/config.js');
+const { connectDb, configObject } = require('./config/config.js');
 const cors = require('cors');
 const appRouter = require('./routes/general.router.js');
 const swaggerJSDoc = require('swagger-jsdoc');
@@ -29,7 +29,7 @@ app.use(cors({
 }))
 app.use(session({
   store: mongoStore.create({
-    mongoUrl: process.env.MONGO_URI, 
+    mongoUrl: configObject.mongo_uri, 
     mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
