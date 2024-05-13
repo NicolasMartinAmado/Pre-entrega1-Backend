@@ -7,7 +7,7 @@ const TopNavbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/session/logout', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/session/logout`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
@@ -35,10 +35,10 @@ const TopNavbar = () => {
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                     <Link to="/" className="text-2xl font-semibold text-[#8ed37f] hover:bg-[#8ed37f] hover:text-white px-2 py-1 rounded-md">Messi Ecommerce</Link>
-                    <div className="ml-6 space-x-4">
+                    <div className="ml-6 space-x-4" style={{display:'flex', justifyContent:'space-around'}}>
                         <Link to="/" className="text-black hover:text-gray-600">Inicio</Link>
                         <Link to="/chat" className="text-black hover:text-gray-600">Chat</Link>
-                        <Link to="/products" className="text-black hover:text-gray-600">Vista de Productos</Link>
+                        <Link to="/products" className="text-black hover:text-gray-600">Productos</Link>
                         <Link to="/realtimeproducts" className="text-black hover:text-gray-600">Manejo de Productos</Link>
                     </div>
                 </div>

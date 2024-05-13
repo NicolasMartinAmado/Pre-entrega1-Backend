@@ -8,7 +8,8 @@
   "scripts": {
     "test": "node src/test/productRouter.test.js",
     "start": "nodemon src/server.js --mode production",
-    "run": "node src/server.js"
+    "run": "node src/server.js",
+    "test2": "node src/mockDb/test.js"
   },
   "keywords": [],
   "author": "",

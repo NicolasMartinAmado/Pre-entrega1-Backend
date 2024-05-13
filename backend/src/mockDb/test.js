@@ -1,9 +1,9 @@
 async function asyncThings(){
 
-    const ProductManager = require("../ProductManager");
+    const productmanager = require(`../daos/file/productManagerFile`)
 
     // Instance new class
-    const product = new ProductManager("./src/mockDB/products.json");
+    const product = new productmanager("./src/mockDB/products.json");
 
     await product.addProduct('Product test', 'This a test product', 200, ['Without image'], 'abc123', 25);
     await product.addProduct('Product 2 test', 'This a test product 2', 100, ['Without image'], 'abc456', 20);
