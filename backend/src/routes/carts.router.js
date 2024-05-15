@@ -1,31 +1,33 @@
 const { Router } = require('express')
-const CartManager = require('../daos/file/cartManagerFile.js')
-const cartRouter = Router()
+const CartController = require('../controllers/cart.controllers')
+const { authenticateUser, isAuthenticated } = require('../middlewars/auth.middleware')
 
-const managerCart = new CartManager("./carrito.json");
+const router = Router()
+const {
+    getCarts,
+    getCartById,
+    createCart,
+    addProductToCart,
+    removeProductFromCart,
+    updateCart,
+    updateProductQuantity,
+    deleteAllProducts,
+    addProductToCart2,
+    purchaseCart,
+    shoppingCart
+} = new CartController()
+
+router
+    .get('/', getCarts)
+    .post('/', createCart)
+    .get('/:cid', getCartById)
+    .post('/:cid/product/:pid', addProductToCart)
+    .delete('/:cid/product/:pid', removeProductFromCart)
+    .put('/:cid', updateCart)
+    .put('/:cid/product/:pid', updateProductQuantity)
+    .delete('/:cid', deleteAllProducts)
+    .post('/:pid', addProductToCart2)
+    .post('/:cid/purchase', purchaseCart)
 
 
-cartRouter.post('/', async (req, res) => {
-  await firstCartManager.createCart()
-  res.status(200).send("Carrito creado con exito!")
-})
-
-cartRouter.get('/:cid', async (req, res) => {
-  const cartId = req.params.cid;
-  const carritoEncontrado = await managerCart.getCartById(cartId);
-  if(carritoEncontrado) {
-    res.status(200).json(carritoEncontrado);
-  }
-  else{
-    res.status(404).send('No se encontró ningún carrito!')
-  }
-})
-
-cartRouter.post('/:cid/product/:pid', async (req, res) => {
-  const cartId = req.params.cid;
-  const productId = req.params.pid;
-  await managerCart.addtoCart(cartId, productId);
-  res.status(200).send('Se agregó el producto al carrito correctamente!')
-})
-
-module.exports = cartRouter;
+module.exports = router

@@ -1,0 +1,9 @@
+body{
+    background-image: url(https://cdn.pixabay.com/photo/2014/02/19/16/35/background-269933_1280.jpg);
+    background-repeat:no-repeat ;
+    background-attachment: fixed;
+    background-size: cover;
+    object-fit: cover;
+object-fit: cover;
+    background-size: cover;
+}

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { configObject } = require('../config/config.js')
+const { configObject } = require('../config/config')
 const stripe = require('stripe')(configObject.stripe_secret_key)
 
 const router = Router()
@@ -7,8 +7,8 @@ const router = Router()
 router.post('/create-checkout-session', async (req, res) =>{
     const { user, products } = req.body
 
-    console.log("usersss: ", user)
-    console.log("productssss: ", products)
+    console.log("users: ", user)
+    console.log("products: ", products)
 
     const lineItems = products.map((cartItem) => {
         const { quantity } = cartItem;
@@ -34,8 +34,8 @@ router.post('/create-checkout-session', async (req, res) =>{
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `http://localhost:5173/success`,
-            cancel_url: 'http://localhost:5173/cart',
+            success_url: `https://front-end-mern-s5rp.onrender.com/success`,
+            cancel_url: 'https://front-end-mern-s5rp.onrender.com/cart',
             customer_email: user.email,
         });
 

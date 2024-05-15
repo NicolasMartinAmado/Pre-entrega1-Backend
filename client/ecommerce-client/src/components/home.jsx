@@ -1,12 +1,13 @@
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { Producto } from '../data/product'
-
+import "./home.css"
 
 const Home = ({id}) => {
   const product = Producto.find((product) => product.id == id)
   return (
-    <Card style={{ width: '18rem' }}>
+    <div id='hom'> 
+    <Card style={{ width: '12rem' }}>
         <Card.Img variant="top" src={product.thumbnail} />
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>
@@ -15,6 +16,7 @@ const Home = ({id}) => {
           <ListGroup.Item>${product.price}</ListGroup.Item>
         </ListGroup>
     </Card>
+    </div>
   )
 }
 

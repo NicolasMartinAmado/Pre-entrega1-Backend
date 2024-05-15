@@ -1,24 +1,14 @@
 [
-  {
-    "id": 2,
-    "title": "Lamborghini",
-    "description": "Aventador",
-    "price": 9000000,
-    "thumbnail": "../",
-    "code": 5,
-    "stock": 32,
-    "category": "vehicles",
-    "status": true
-  },
+ 
   {
     "id": 4,
-    "title": "Lamborghini",
+    "title": "Lambo",
     "description": "Spider",
     "price": 10000000,
-    "thumbnail": "../",
+    "thumbnail": "https://medialamborghini-meride-tv.akamaized.net/meride/lamborghini/video/images/folder1/1252/vlcsnap-2023-03-17-16h18m30s840.jpg",
     "code": 3,
     "stock": 2,
-    "category": "vehicles",
+    "category": "lamborghini vehicles",
     "status": true
   },
   {
@@ -26,10 +16,10 @@
     "title": "Peugeot",
     "description": "RCZ",
     "price": 900000,
-    "thumbnail": "../",
+    "thumbnail": "https://tn.com.ar/resizer/BRpw1iLsvFO0Zw0O8Clj1Zd6-YI=/767x0/smart/filters:format(webp)/cloudfront-us-east-1.images.arcpublishing.com/artear/3TFL34BUMDB7RWW4H3HUCCI2KU.jpg",
     "code": 5651,
     "stock": 4,
-    "category": "vehicles",
+    "category": "Peugeot vehicles",
     "status": true
   },
   {
@@ -37,10 +27,10 @@
     "title": "Mercedes Benz",
     "description": "sprinter",
     "price": 6050000,
-    "thumbnail": "../",
+    "thumbnail": "https://img.remediosdigitales.com/474208/18c0104_19p/1366_2000.jpg",
     "code": 6,
     "stock": 20,
-    "category": "vehicles",
+    "category": "Mercedes vehicles",
     "status": true
   },
   {
@@ -48,10 +38,10 @@
     "title": "Audi",
     "description": "TT",
     "price": 78500000,
-    "thumbnail": "../",
+    "thumbnail": "https://acnews.blob.core.windows.net/imgnews/large/NAZ_9b63e097ba764683b356e75f121c6bcb.jpg",
     "code": 45,
     "stock": 6,
-    "category": "vehicles",
+    "category": "Audi vehicles",
     "status": true
   },
   {
@@ -59,14 +49,10 @@
     "title": "BMW",
     "description": "Duster 12",
     "price": 450000,
-    "thumbnail": "../",
+    "thumbnail": "https://bestsellingcarsblog.com/wp-content/uploads/2024/02/BMW-X5-Switzerland-January-2024.jpeg",
     "code": 1,
     "stock": 54,
-    "category": "vehicles",
+    "category": " BMW vehicles",
     "status": true
-  },
-  {
-    "id": 7,
-    "code": 72.97001109049455
   }
 ]

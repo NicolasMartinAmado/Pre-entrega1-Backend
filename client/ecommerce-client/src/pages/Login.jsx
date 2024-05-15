@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { useUserContext } from "../context/ContextUser"
 import { Link, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
+import "../css/login.css"
 
 
 
@@ -43,9 +44,9 @@ const LoginPage = () => {
 
 
   return (
-    <div className='bg-zinc-800 max-w-md p-10 rounded-md mx-auto mt-40'>
+    <div id="log" >
 
-        <h1 className="text-2xl font-bold text-white flex justify-center mb-2">Login</h1>
+        <h1 style={{paddingTop:150}} className="text-2xl font-bold text-white flex justify-center mb-2">Login</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
             <input type="email" {...register("email", {required: true})} 

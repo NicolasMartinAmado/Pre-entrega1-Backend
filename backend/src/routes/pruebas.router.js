@@ -1,10 +1,10 @@
 const { Router } = require('express')
-const { generateProducts } = require('../tests/test.router')
+const { generateProducts } = require('../test/routertest.js')
 
 
 const router = Router()
 
-router.get('/mockingproducts', (req, res) =>{
+router.get('/m', (req, res) =>{
 
     let products = []
 

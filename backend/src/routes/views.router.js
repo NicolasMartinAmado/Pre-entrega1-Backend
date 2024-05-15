@@ -2,6 +2,7 @@ const { Router } = require('express')
 const ViewsController = require('../controllers/views.controller.js')
 const { isAdminOrPremium, isUser, isAdmin } = require('../middlewars/roleverification.js')
 const { isAuthenticated } = require('../middlewars/auth.middleware.js')
+const { generateProducts } = require('../test/routertest.js')
 
 
 const router = Router()
