@@ -39,8 +39,8 @@ const TopNavbar = () => {
                     
                     <div id='init' className="ml-6 space-x-4" style={{display:'flex', justifyContent:'space-around', color:'white'}}>
                     <Link to="/cart" className="relative flex items-center space-x-2">
-                     <img id='cart' style={{display:'flex', justifyContent:'flex-end', width:100
-                     }} src="../public\icons8-carrito-de-compras-96.png" alt="" />
+                     <img id='cart' src="https://w7.pngwing.com/pngs/225/984/png-transparent-computer-icons-shopping-cart-encapsulated-postscript-shopping-cart-angle-black-shopping.png" alt="" style={{display:'flex', justifyContent:'flex-end', width:100
+                     }}  />
                     </Link>
                         <Link to="/" className="text-white hover:text-gray-600">Inicio</Link>
                         <Link to="/chat" className="text-white hover:text-gray-600">Chat</Link>

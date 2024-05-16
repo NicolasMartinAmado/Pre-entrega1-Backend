@@ -63,7 +63,7 @@ const RealTimeProducts = () => {
             credentials: 'include'  
         }
         try{
-            const response = await fetch(`http://localhost:8080/api/products`, requestOptions)
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, requestOptions)
             console.log(response)
             if (!response.ok) {
                 const data = await response.json()
@@ -117,13 +117,13 @@ const RealTimeProducts = () => {
     })
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">Puedes crear como borrar productos</h2>
-            <h3 className="text-xl mb-4">Lista de los Productos</h3>
+        <div id='rltp' className="container mx-auto p-4">
+            <h2 className="text-2xl font-bold mb-4">Puedes crear y eliminar productos</h2>
+            <h3 className="text-xl mb-4">Lista de Productos</h3>
 
-            {/* Form to add a product */}
+       
             <form onSubmit={onSubmit} className="mb-6 space-y-4">
-                {/* Input for title */}
+              
                 <div className="flex flex-col">
                     <label htmlFor="title" className="font-semibold">Título</label>
                     <input
@@ -134,7 +134,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for description */}
                 <div className="flex flex-col">
                     <label htmlFor="description" className="font-semibold">Descripción</label>
                     <input
@@ -144,8 +143,7 @@ const RealTimeProducts = () => {
                         className="border border-gray-300 p-2 rounded-md"
                     />
                 </div>
-
-                {/* Input for price */}
+             
                 <div className="flex flex-col">
                     <label htmlFor="price" className="font-semibold">Precio</label>
                     <input
@@ -156,7 +154,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for thumbnail */}
                 <div className="flex flex-col">
                     <label htmlFor="thumbnail" className="font-semibold">Imagen</label>
                     <input
@@ -167,7 +164,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for code */}
                 <div className="flex flex-col">
                     <label htmlFor="code" className="font-semibold">Código</label>
                     <input
@@ -178,7 +174,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for stock */}
                 <div className="flex flex-col">
                     <label htmlFor="stock" className="font-semibold">Stock</label>
                     <input
@@ -189,7 +184,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for status */}
                 <div className="flex items-center">
                     <label htmlFor="status" className="mr-2 font-semibold">Status</label>
                     <input
@@ -199,7 +193,6 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Input for category */}
                 <div className="flex flex-col">
                     <label htmlFor="category" className="font-semibold">Categoría</label>
                     <input
@@ -210,13 +203,11 @@ const RealTimeProducts = () => {
                     />
                 </div>
 
-                {/* Submit button */}
                 <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">
                     Agregar Producto
                 </button>
             </form>
 
-            {/* List of products */}
             <div className="item-products" id="products">
                 <ul className="list-none space-y-4">
                 {products.map(product => (
