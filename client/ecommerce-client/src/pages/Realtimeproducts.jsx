@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useUserContext } from '../context/ContextUser'
+import "../css/realtimeproducts.css"
 
 
 const RealTimeProducts = () => {
@@ -44,7 +45,7 @@ const RealTimeProducts = () => {
         }
     }
     
-    //console.log(products)
+   
     const onSubmit = handleSubmit(async (product) => {
 
         console.log("producto dentro de la funcion", product)
@@ -62,7 +63,7 @@ const RealTimeProducts = () => {
             credentials: 'include'  
         }
         try{
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, requestOptions)
+            const response = await fetch(`http://localhost:8080/api/products`, requestOptions)
             console.log(response)
             if (!response.ok) {
                 const data = await response.json()

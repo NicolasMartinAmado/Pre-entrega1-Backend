@@ -12,9 +12,11 @@ const transport = nodemailer.createTransport({
 
 
 async function sendEmail(to, subject, html) {
+
     try {
+        const email = prompt().valueOf()
         await transport.sendMail({
-            from: 'Your App Mail <your_email@example.com>',
+            from: `Your App Mail ${email}`,
             to,
             subject,
             html
