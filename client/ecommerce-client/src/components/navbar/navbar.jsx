@@ -32,7 +32,7 @@ const TopNavbar = () => {
     const isAuthenticated = Boolean(token && token.trim() !== '');
 
     return (
-        <nav id='nav' className="bg-white shadow-md fixed-top" style={{display:'flex', justifyContent:'space-around'}}>
+        <nav id='nav' className="fixed-top" style={{display:'flex', justifyContent:'space-around'}}>
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div id='links' className="flex items-center">
                     <Link to="/" className="text-2xl font-semibold text-white hover:bg-[#8ed37f] hover:text-white px-2 py-1 rounded-md"> <h1>Messi Ecommerce</h1></Link>
@@ -53,7 +53,7 @@ const TopNavbar = () => {
                     
 
                     {isAuthenticated ? (
-                        <button style={{paddingBottom:150}}
+                        <button style={{paddingBottom:10}}
                             onClick={handleLogout}
                             className="bg-red-100 text-black px-4 py-2 rounded-md hover:bg-red-600"
                         >
@@ -61,7 +61,7 @@ const TopNavbar = () => {
                         </button>
                     ) : (
                         <Link to="/login">
-                            <button style={{paddingBottom:150}}  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                            <button style={{paddingBottom:10}}  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
                                 Iniciar Sesión
                             </button>
                         </Link>
