@@ -63,7 +63,7 @@ const RealTimeProducts = () => {
             credentials: 'include'  
         }
         try{
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/pruebas/m`, requestOptions)
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`, requestOptions)
             console.log(response)
             if (!response.ok) {
                 const data = await response.json()
