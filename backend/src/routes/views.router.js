@@ -25,7 +25,7 @@ const {
 
 router.get('/', home)
 
-router.get('/realTimeProducts', isAdminOrPremium, realTimeProducts)
+router.get('/realtimeproducts', isAdminOrPremium, realTimeProducts)
 
 router.get('/chat',isUser , chat)
 

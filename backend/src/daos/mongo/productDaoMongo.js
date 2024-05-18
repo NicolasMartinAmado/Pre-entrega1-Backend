@@ -21,7 +21,7 @@ class productDaoMongo {
                 error.code = 'INVALID_PRODUCT'
                 throw error
             }
-            const newProduct = new this.model({
+            const newProduct = new this.model.create({
                 title,
                 description,
                 price,
@@ -63,7 +63,7 @@ class productDaoMongo {
             lean: true
         }
 
-        const result = await this.model.paginate(filter, options)
+        const result = await this.model(filter, options)
         return {
             docs: result.docs,
             hasPrevPage: result.hasPrevPage,
