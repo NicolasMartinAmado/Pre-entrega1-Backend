@@ -5,7 +5,7 @@ const { configObject } = require('../config/config.js')
 
 const router = Router()
 
-router.get('/m', (req, res) =>{
+router.get('/', (req, res) =>{
 
     let products = []
 
