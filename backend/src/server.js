@@ -77,6 +77,8 @@ app.set('views', __dirname + '/views');
 
 app.engine(`hbs`, handlebars.engine());
 
+app.get(`api/products`)
+
 app.get(`/single`, (req, res) => {
   res.send('archivo subido');
 });

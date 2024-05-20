@@ -63,7 +63,7 @@ class productDaoMongo {
             lean: true
         }
 
-        const result = await this.model(filter, options)
+        const result = await this.model.paginate(filter, options)
         return {
             docs: result.docs,
             hasPrevPage: result.hasPrevPage,
