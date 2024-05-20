@@ -26,8 +26,7 @@ const CartProvider = ({ children }) => {
     }
 
     console.log(user)
-    //console.log(token)
-    //console.log("carrito id de user", user.cart)
+   
    
     useEffect(() => {
       if (user && user.cart) {
