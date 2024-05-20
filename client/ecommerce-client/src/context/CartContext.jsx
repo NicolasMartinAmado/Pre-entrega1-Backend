@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from "react"
 import { useUserContext } from "./ContextUser"
 
@@ -41,7 +42,7 @@ const CartProvider = ({ children }) => {
           };
   
           try {
-            const response = await fetch(`http://localhost:8080/api/carts/${user.cart}`, requestOptions);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/carts/${user.cart}`, requestOptions);
             if (!response.ok) {
               const data = await response.json();
               console.error(`Error al obtener el carrito: ${data.message}`);
