@@ -16,7 +16,8 @@ router.use('/api/carts', cartRouter)
 router.use('/', viewsRouter)
 router.use('/api/session', sessionRouter)
 router.use('/api', mailRouter)
-router.use('/products', pruebasRouter)
+router.use('/pruebas', pruebasRouter)
+
 router.use('/api/payments', paymentsRouter)
 
 router.use(handleError)
