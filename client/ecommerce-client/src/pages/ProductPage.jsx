@@ -12,8 +12,7 @@ const ProductPages = () => {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${currentPage}`)
             const data = await response.json()
 
-            setProducts(data)
-            console.log(data)
+            setProducts(data.payload.docs)
           
         } catch (error) {
             console.error('Error fetching products:', error)
