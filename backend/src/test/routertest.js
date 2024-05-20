@@ -10,6 +10,7 @@ const generateProducts = () => {
         code: faker.commerce.isbn(),
         stock: faker.string.numeric(),
         category: faker.word.noun(),
+        status: true
     }
 }
 

@@ -85,7 +85,7 @@ class ViewsController {
             //console.log('User data:', user)
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
             //console.log(docs, hasPrevPage, hasNextPage, prevPage, nextPage, page)
-            res.render('productsView', {
+            res.render('productsview', {
                 title: 'Products View',
                 user,
                 docs,
@@ -179,7 +179,7 @@ class ViewsController {
     }
 
     resetPasswordView = async(req, res) => {
-        res.render('resetPassword')
+        res.render('reset-password')
     }
 
     sendResetEmail = async (req, res) => {
@@ -240,7 +240,7 @@ class ViewsController {
             return res.status(400).json({ error: 'Token is required' })
         }
         
-        res.render('resetPasswordToken', { token })
+        res.render('reset-passwordToken', { token })
     }
 
     adminView = async (req, res) => {

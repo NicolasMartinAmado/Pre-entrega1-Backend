@@ -13,10 +13,7 @@ const ProductPages = () => {
             const data = await response.json()
 
             setProducts(data.payload.docs)
-            console.log(products)
-            setHasNextPage(data.payload.hasNextPage)
-            console.log(data.payload.hasNextPage)
-            setHasPrevPage(data.payload.hasPrevPage)
+          
         } catch (error) {
             console.error('Error fetching products:', error)
         }

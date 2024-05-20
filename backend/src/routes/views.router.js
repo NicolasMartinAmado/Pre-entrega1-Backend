@@ -25,11 +25,11 @@ const {
 
 router.get('/', home)
 
-router.get('/realtimeproducts', isAdminOrPremium, realTimeProducts)
+router.get('/realtimeproducts', realTimeProducts)
 
 router.get('/chat',isUser , chat)
 
-router.get('/products', products)
+router.get('/productsview', products)
 
 router.get('/products/details/:pid', productsDetails)
 

@@ -1,6 +1,9 @@
+const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const { configObject } = require('../config/config')
+const { logger } = require('./logger')
 
+// Configurar el transporte de nodemailer
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
@@ -10,21 +13,34 @@ const transport = nodemailer.createTransport({
     }
 })
 
+// Función para generar y enviar el correo electrónico con el enlace de restablecimiento de contraseña
+exports.sendPasswordResetEmail = async (userId, userEmail) => {
+    // Generar un token JWT con el ID de usuario y una expiración de 1 hora
+    const token = jwt.sign({ userId }, 'clavesecreta', { expiresIn: '1h' })
 
-async function sendEmail(to, subject, html) {
+    // Construir la URL de restablecimiento de contraseña con el token como parámetro de consulta
+    const resetUrl = `https://localhost:4000/reset-password?token=${token}`
 
-    try {
-        const email = prompt().valueOf()
-        await transport.sendMail({
-            from: `Your App Mail ${email}`,
-            to,
-            subject,
-            html
-        })
-        console.log(`Email sent to ${to}`)
-    } catch (error) {
-        console.error(`Error sending email to ${to}:`, error)
-    }
+    // Crear y enviar el correo electrónico
+    await transport.sendMail({
+        from: 'Tu aplicación <Ecommerce>',
+        to: userEmail,
+        subject: 'Restablecer contraseña',
+        html: `
+            <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+            <a href="${resetUrl}">Restablecer contraseña</a>
+        `
+    })
 }
 
-module.exports = {sendEmail}
+exports.verifyResetToken = (token) => {
+    try {
+        
+        const decoded = jwt.verify(token, 'clavesecreta')
+        return decoded
+    } catch (error) {
+        
+        logger.error('Token not found')
+        return null
+    }
+}

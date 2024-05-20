@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { generateProducts } = require('../test/routertest.js')
+const { configObject } = require('../config/config.js')
 
 
 const router = Router()

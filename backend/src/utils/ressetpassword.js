@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const { configObject } = require('../config/config')
 const { logger } = require('./logger')
 
-// Configurar el transporte de nodemailer
+
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
@@ -16,9 +16,9 @@ const transport = nodemailer.createTransport({
 
 exports.sendPasswordResetEmail = async (userId, userEmail) => {
     
-    const token = jwt.sign({ userId }, 'secreto', { expiresIn: '1h' })
+    const token = jwt.sign({ userId }, 'clavesecreta', { expiresIn: '1h' })
 
-    const resetUrl = `https://localhost:8080/api/reset-password?token=${token}`
+    const resetUrl = `https://localhost:8080/reset-password?token=${token}`
 
     // Crear y enviar el correo electrónico
     await transport.sendMail({
@@ -36,7 +36,7 @@ exports.sendPasswordResetEmail = async (userId, userEmail) => {
 exports.verifyResetToken = (token) => {
     try {
         
-        const decoded = jwt.verify(token, 'secreto')
+        const decoded = jwt.verify(token, 'clavesecreta')
         return decoded
     } catch (error) {
      
