@@ -8,19 +8,18 @@ const ProductPages = () => {
     const [hasPrevPage, setHasPrevPage] = useState(false)
 
     const fetchProducts = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${currentPage}`)
-            const data = await response.json()
-
-            setProducts(data.payload.docs)
-            console.log(products)
-            setHasNextPage(data.payload.hasNextPage)
-            console.log(data.payload.hasNextPage)
-            setHasPrevPage(data.payload.hasPrevPage)
-        } catch (error) {
-            console.error('Error fetching products:', error)
+        const [ product, setProduct ] = useState([]);
+      try {
+        const resp = await fetchData(`${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${currentPage}`);
+        if (resp?.isError === false) {
+          setProduct(resp.payload);
+        } else {
+          message(resp.message || "Error al obtener productos","error")
         }
-    }
+      } catch (error) {
+        message("Error al obtener productos debido a un problema en el sistema","error");
+      }
+    };
 
     useEffect(() => {
         fetchProducts(currentPage)
