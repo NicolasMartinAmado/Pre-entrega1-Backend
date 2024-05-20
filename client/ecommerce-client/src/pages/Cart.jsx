@@ -91,7 +91,7 @@ const CartPage = () => {
 
     const handlePurchase = async () => {
 
-        const stripePromise = await loadStripe('pk_test_51PCmSCILZElyPf104lCiiB9GhpmFaK8OQnWZQFadahm4oiRnKr0FASOkzbdCU5zM9aIbAswPz4n7Fs3eMXEQnc8i002S3jhJUM')
+        const stripePromise = await loadStripe('pk_test_51PD9N0ACwFpVnhcnWEX5M2qmUxBHAPshQrwX3y3XOdwG3OWaSY7RkpuRelBX1fimiMJkt1PsCRmtSpjSyy9JMzK500XKqbU8S1')
 
         if (!user.cart) {
             console.error('Cart ID is undefined')

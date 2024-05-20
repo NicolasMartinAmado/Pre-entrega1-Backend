@@ -15,7 +15,7 @@ class ProdcutsController {
     getProducts = async (req,res)=>{
         try{
             const { limit, pageNumber, sort, query } = req.query
-        
+
             const parsedLimit = parseInt(limit) || 10
             const parsedPageNumber = parseInt(pageNumber) || 1
             const sortOrder = sort === 'asc' ? 1 : -1
