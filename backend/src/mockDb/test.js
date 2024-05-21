@@ -1,9 +1,11 @@
+const { config } = require("dotenv");
+
 async function asyncThings(){
 
     const productmanager = require(`../daos/file/productManagerFile`)
 
     // Instance new class
-    const product = new productmanager("./src/mockDB/products.json");
+    const product = new productmanager(`http://localhost:8080/api/products`);
 
     await product.addProduct('Product test', 'This a test product', 200, ['Without image'], 'abc123', 25);
     await product.addProduct('Product 2 test', 'This a test product 2', 100, ['Without image'], 'abc456', 20);

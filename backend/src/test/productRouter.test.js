@@ -1,19 +1,21 @@
 
-const chai = require('chai')
-const chaiHttp = require('chai-http')
-const { expect } = chai
-chai.use(chaiHttp)
 
-const app = require('../server')
-const { productDaoMongo } = require('../daos/mongo/productDaoMongo')
-const { ProductRepository } = require('../repositories/product.repository')
-const { ProdcutsController } = require('../controllers/products.controllers')
+import { use, request } from 'chai';
+import chaiHttp from 'chai-http';
+import { expect } from 'chai';
+use(chaiHttp);
+
+
+import app from '../server.js';
+import productDaoMongo from '../daos/mongo/productDaoMongo.js';
+
+import ProductsController from '../controllers/products.controllers.js';
 
 
 describe('Product Router Tests', () => {
 
     it('Should get all products', (done) => {
-        chai.request(app)
+        request(app)
             .get('/api/products')
             .end((err, res) => {
                 expect(res).to.have.status(200)
@@ -24,7 +26,7 @@ describe('Product Router Tests', () => {
     })
 
     it('Should add a new product', (done) => {
-        chai.request(app)
+        request(app)
             .post('/api/products')
             .send({
                 title: 'New Product',
@@ -48,7 +50,7 @@ describe('Product Router Tests', () => {
 
         const existingProductId = 'existingProductId'
 
-        chai.request(app)
+        request(app)
             .get(`/api/products/${existingProductId}`)
             .end((err, res) => {
                 expect(res).to.have.status(200)
@@ -73,9 +75,9 @@ describe('Product Controller Tests', () => {
             category: 'new-category'
         }
 
-        const productsController = new ProdcutsController()
+        const ProductsControll = new ProductsController()
 
-        await productsController.addProduct(newProductData)
+        await ProductsControll.addProduct(newProductData)
 
         const addedProduct = await productDaoMongo.getById(newProductData.code)
         expect(addedProduct).to.not.be.null

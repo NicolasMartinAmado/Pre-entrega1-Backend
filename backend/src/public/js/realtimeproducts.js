@@ -1,7 +1,4 @@
 
-//const { logger } = require("../../utils/logger");
-
-//console.log("bienvenidos al script")
 const socket = io()
 
 socket.on('products', (data) => {
@@ -25,7 +22,7 @@ socket.on('products', (data) => {
 })
 
 const removeProduct = (id) => {
-  fetch(`/api/products/${id}`, {
+  fetch(`http://localhost:8080/api/products/${id}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
@@ -53,7 +50,8 @@ const addProduct = () => {
         status,
         category,
     }
-    fetch('api/products', {
+   
+    fetch("http://localhost:8080/api/products", {
         method:'POST',
         headers:{
             "Content-Type": "application/json",

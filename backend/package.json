@@ -5,8 +5,9 @@
   "name": "curso-backend",
   "version": "1.0.0",
   "main": "server.js",
+  
   "scripts": {
-    "test": "node src/routes/pruebas.router.js",
+    "test": "node src/test/productRouter.test.js",
     "start": "nodemon src/server.js --mode production",
     "run": "node src/server.js",
     "test2": "node src/mockDb/test.js"
@@ -20,7 +21,7 @@
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
     "bcrypt": "^5.1.1",
-    "chai": "^5.1.0",
+    "chai": "^5.1.1",
     "chai-http": "^4.4.0",
     "commander": "^12.0.0",
     "connect-mongo": "^5.1.0",

@@ -4,8 +4,8 @@ const { error } = require('console');
 
 class ProductManager {
     constructor() {
-        this.path = "../../mockDB/products.json";
-        this.products = [];
+        this.path = "http://localhost:8080/api/products";
+        this.products = 
         this.loadProducts();
     }
 

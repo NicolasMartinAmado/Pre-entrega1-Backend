@@ -63,10 +63,7 @@ class ProdcutsController {
 
     addProduct = async (req,res,next)=>{
         try {
-            const {
-              product,
-              user
-            } = req.body
+            const  product = req.body
             console.log(product.title,
                 product.description,
                 product.price,
@@ -74,15 +71,8 @@ class ProdcutsController {
                 product.code,
                 product.stock,
                 product.status,
-                product.category,
-                user)
-
+                product.category)
             
-            
-            if (user.role !== 'premium' && user.role !== 'admin') {
-                return res.status(403).json({ status: 'error', message: 'Only user premium or admin can create product' })
-            }
-            console.log('pase el verificador, soy admin')
 
             const owner = user.id
             const newProduct = await this.productService.addProduct({

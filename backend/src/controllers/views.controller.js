@@ -45,7 +45,7 @@ class ViewsController {
             const user = await this.userViewService.getUserBy({ _id: userId })
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
             //console.log(docs)
-            res.render('realTimeProducts', {
+            res.render('realtimeproducts', {
                 title: 'Real Time',
                 user,
                 docs,

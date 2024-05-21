@@ -15,6 +15,7 @@ const { initializePassport } = require('./config/passport.config.js');
 const { model } = require('mongoose');
 const handlebarsHelpers = require('handlebars-helpers')();
 const eq = handlebarsHelpers.eq;
+const configureSocketIO = require('./helpers/socket.io.js')
 
 const app = express();
 const port = 8080
@@ -41,9 +42,12 @@ app.use(session({
   saveUninitialized: true
 }))
 
+
 initializePassport();
 app.use(passport.initialize());
 app.use(appRouter);
+
+
 
 const swaggerOptions = {
   definition: {
@@ -85,12 +89,15 @@ app.get('/usuario', (req, res) => {
   res.json({ nombre: 'Julian', edad: 85, apellido: 'Alvarez', correo: 'Julianalv@gmail.com' });
 });
 
+
 const serverHttp = app.listen(port, () => {
   logger.info(`Server is running on port http://localhost:${port}`);
 });
 
-const socketserver = new Server(serverHttp);
-socketserver.on(`connection`, (socket) => {
+const io = configureSocketIO(serverHttp)
+
+
+/*socketserver.on(`connection`, (socket) => {
   console.log('nuevo cliente conectado');
 
   let arraymsj = [];
@@ -116,6 +123,6 @@ socketserver.on(`connection`, (socket) => {
     arraymsj.push(data);
     socketserver.emit(`mensajeuser`, arraymsj);
   });
-});
+});*/
 
-module.exports = app
+module.exports = {app, io}

@@ -21,7 +21,7 @@ class productDaoMongo {
                 error.code = 'INVALID_PRODUCT'
                 throw error
             }
-            const newProduct = new this.model.create({
+            const newProduct = new this.model({
                 title,
                 description,
                 price,
@@ -97,7 +97,7 @@ class productDaoMongo {
                 code,
                 stock,
                 status,
-                category,
+                category
               },
             },
             { new: true } 
