@@ -10,7 +10,7 @@ const ProductPages = () => {
     const fetchProducts = async () => {
         const [ product, setProduct ] = useState([]);
       try {
-        const resp = await fetchData(`${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${currentPage}`);
+        const resp = await fetchData(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
         if (resp?.isError === false) {
           setProduct(resp.payload);
         } else {
