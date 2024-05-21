@@ -74,7 +74,7 @@ class ProdcutsController {
                 product.category)
             
 
-            const owner = user.id
+            
             const newProduct = await this.productService.addProduct({
                 title: product.title,
                 description: product.description,
@@ -84,7 +84,7 @@ class ProdcutsController {
                 stock: product.stock,
                 status: product.status,
                 category: product.category,
-                owner,    
+                  
             })
             res.json({
                 status: 'success',
@@ -98,7 +98,7 @@ class ProdcutsController {
                         stock: newProduct.stock,
                         status: newProduct.status,
                         category: newProduct.category,
-                        owner: newProduct.owner,
+                       
                     }
                 },
                 message: 'Product added successfully',
@@ -110,8 +110,10 @@ class ProdcutsController {
                 res.status(400).json({ status: 'error', message: 'Invalid product data' })
             } else {
                 res.status(500).json({ status: 'error', message: 'Server error' })
+                console.log(error)
             }
         }
+        
     }
 
     updateProduct = async (req,res,next)=>{

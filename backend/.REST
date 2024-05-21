@@ -48,7 +48,7 @@ Content-Type: "application/json"
 POST http://localhost:8080/api/products
 
 Content-Type: "application/json"
-   {     "id":,
+   {    
             "title": "Lamborhini Aventador",
             "description": "Lamborhini v2.02",
             "price" : 45521,
@@ -56,13 +56,8 @@ Content-Type: "application/json"
             "stock": 5,
             "code":"dfsgsdgs",
             "status": true,
-            "owner": "user"
+            "category": "vehicles"
 
-                
-            
-              
-                
-              
 }
 
 

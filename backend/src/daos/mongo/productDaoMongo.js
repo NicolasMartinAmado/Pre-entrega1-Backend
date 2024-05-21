@@ -7,8 +7,8 @@ class productDaoMongo {
         this.model = productModel
     }
 
-    async add({title, description, price, thumbnail, code, stock, status, category, owner}){
-        console.log("Dao :", title, description, price, thumbnail, code, stock, status, category, owner)
+    async add({title, description, price, thumbnail, code, stock, status, category}){
+        console.log("Dao :", title, description, price, thumbnail, code, stock, status, category)
         const existingProduct = await this.model.findOne({ code })
         console.log(existingProduct)
         if (existingProduct) {
@@ -29,8 +29,7 @@ class productDaoMongo {
                 code,
                 stock,
                 status,
-                category,
-                owner,
+                category
             });
         
             console.log("New product object:", newProduct);

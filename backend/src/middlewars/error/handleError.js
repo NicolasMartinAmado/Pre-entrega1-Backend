@@ -8,6 +8,6 @@ exports.handleError = ( err, req, res, next ) => {
             return res.send({status: 'error', error: err.message})
     
         default:
-            return res.status(500).send({status: 'error', error: 'error server'})
+            return res.status(500).send({status: 'error', error: 'err server'})
     }
 }

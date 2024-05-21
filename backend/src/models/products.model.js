@@ -8,6 +8,7 @@ const productsSchema = new Schema({
     },
     description: {
         type: String,
+        required:true
     },
     price: {
         type: Number,
@@ -37,13 +38,8 @@ const productsSchema = new Schema({
     isActive: {
         type: Boolean,
         default: true
-    },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
-        default: null,
-        required: true
-    },
+    }
+ 
 })
 
 productsSchema.plugin(mongoosePaginate)
