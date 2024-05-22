@@ -28,7 +28,8 @@ router
     .delete('/:cid', deleteAllProducts)
     .post('/:pid', addProductToCart2)
     .post('/:cid/purchase', purchaseCart)
-    .get(`/product/cart`)
+    
+    
 
 
 module.exports = router

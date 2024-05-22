@@ -35,7 +35,7 @@ class cartDaoMongo {
     }
 
     async add(cId, pid) {
-        console.log("datpssss", cId, pid)
+        console.log("data", cId, pid)
         let cart = await this.model.findOne({ _id: cId })
             
         if (!cart) {

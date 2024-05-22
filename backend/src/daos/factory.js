@@ -20,6 +20,8 @@ switch (configObject.persistence) {
 
         const MessageDaoMongo = require('./mongo/messageDaomongo.js')
         MessageDao = MessageDaoMongo
+
+
         break;
 
     case 'FILE':

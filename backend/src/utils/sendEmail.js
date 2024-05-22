@@ -1,9 +1,6 @@
-const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const { configObject } = require('../config/config')
-const { logger } = require('./logger')
 
-// Configurar el transporte de nodemailer
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
@@ -13,34 +10,25 @@ const transport = nodemailer.createTransport({
     }
 })
 
-// Función para generar y enviar el correo electrónico con el enlace de restablecimiento de contraseña
-exports.sendPasswordResetEmail = async (userId, userEmail) => {
-    // Generar un token JWT con el ID de usuario y una expiración de 1 hora
-    const token = jwt.sign({ userId }, 'clavesecreta', { expiresIn: '1h' })
-
-    // Construir la URL de restablecimiento de contraseña con el token como parámetro de consulta
-    const resetUrl = `https://localhost:4000/reset-password?token=${token}`
-
-    // Crear y enviar el correo electrónico
-    await transport.sendMail({
-        from: 'Tu aplicación <Ecommerce>',
-        to: userEmail,
-        subject: 'Restablecer contraseña',
-        html: `
-            <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-            <a href="${resetUrl}">Restablecer contraseña</a>
-        `
-    })
+async function sendEmail(to, subject, html) {
+    try {
+        await transport.sendMail({
+            from: 'Your App Name <nikiamado123@gmail.com>',
+            to: `nikiamado123@gmail.com`,
+            subject: `de prueba`,
+            html: `<div>
+            <h2>Bienvenido a prueba de email </h2>
+        </div>` 
+        
+        })
+        
+        console.log(`Email sent to`)
+    } catch (error) {
+        console.error(`Error sending email`, error)
+        console.log(error)
+    }
 }
 
-exports.verifyResetToken = (token) => {
-    try {
-        
-        const decoded = jwt.verify(token, 'clavesecreta')
-        return decoded
-    } catch (error) {
-        
-        logger.error('Token not found')
-        return null
-    }
+module.exports = {
+    sendEmail
 }

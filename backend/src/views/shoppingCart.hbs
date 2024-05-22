@@ -3,11 +3,12 @@
     <header>
         <h3 class="text-center">Shopping Cart</h3>
     </header>
-    <div class="text-center">
+    <div class="text-center" id="productocart">
         {{#each productsWithQuantities}}
-            <p>{{this.productDetail.thumbnail}}</p>
+            <img src="{{this.productDetail.thumbnail}}" alt="">
             <p>{{this.productDetail.title}}</p>
-            <p>{{this.quantity}}</p>
+            <p>Cantidad:{{this.quantity}}</p>
+           
         {{/each}}
     </div>
     <div class="text-center">

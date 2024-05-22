@@ -3,6 +3,7 @@ const ViewsController = require('../controllers/views.controller.js')
 const { isAdminOrPremium, isUser, isAdmin } = require('../middlewars/roleverification.js')
 const { isAuthenticated } = require('../middlewars/auth.middleware.js')
 const { generateProducts } = require('../test/routertest.js')
+const { sendEmail } = require('../utils/sendEmail.js')
 
 
 const router = Router()
@@ -37,7 +38,7 @@ router.get('/login', login)
 
 router.get('/register', register)
 
-router.get('/cart', isAuthenticated, shoppingCart)
+router.get('/shoppingCart',shoppingCart)
 
 router.get('/reset-password', resetPasswordView)
 

@@ -80,7 +80,9 @@ class SessionController {
                     role: result.role,
                     cart: result.cart,
                     token: token
+
                 }
+
             })
         } catch (error) {
             logger.error('Error during user registration:', error)
@@ -116,7 +118,7 @@ class SessionController {
                 res.cookie('token', token, {
                     maxAge: 60*60*1000*24,
                     httpOnly: false,
-                }).redirect('/products')
+                })
             }
             else{
     
@@ -130,7 +132,8 @@ class SessionController {
 
                 user.last_connection = new Date()
                 await user.save()
-    
+
+             
                 req.session.user = {
                     user: user._id,
                     first_name: user.first_name,
@@ -163,7 +166,8 @@ class SessionController {
                         role: user.role,
                         token: token
                     }
-                })//.redirect('/products')
+                })
+               
             }
     
         } catch(error) {

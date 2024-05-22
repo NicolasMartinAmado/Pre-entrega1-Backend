@@ -6,6 +6,8 @@ const customError = require('../services/errors/customError.js')
 const { generateCartErrorInfo, generateCartRemoveErrorInfo } = require('../services/errors/generateErrorInfo.js')
 const { EErrors } = require('../services/errors/enum.js')
 const { logger } = require('../utils/logger.js')
+const { sendEmail } = require('../utils/sendEmail')
+const { error } = require('winston')
 
 class CartController {
     constructor(){
@@ -231,7 +233,9 @@ class CartController {
     purchaseCart = async (req, res) => {
         try {
             const { cid } = req.params
-            
+           
+            console.log("Entreee al purchase ", cid)
+            console.log("Purchase initiated by user:")
             const cart = await this.cartService.getCartById(cid)
             if (!cart) {
                 return res.status(404).json({ status: 'error', message: 'Cart not found' })
@@ -239,6 +243,7 @@ class CartController {
             const productUpdates = []
             const productsNotPurchased = []
             let totalAmount = 0
+            const purchasedProducts = []
             for (const item of cart) {
                 const productId = item.product.toString()
                 const productArray = await this.productService.getProductById(productId)
@@ -247,13 +252,15 @@ class CartController {
                 if (!product) {
                     return res.status(404).json({ status: 'error', message: 'Product not found' })
                 }
-                if (product.stock < item.quantity) {
+                else if (product.stock < item.quantity) {
                     productsNotPurchased.push(item.product)
                     continue
                     //return res.status(400).json({ status: 'error', message: `Not enough stock for product ${product._id}` })
                 }
+
                 product.stock -= item.quantity
                 logger.info(product)
+                console.log(product)
                 productUpdates.push(this.productService.updateProduct(productId,
                     product.title, 
                     product.description, 
@@ -265,32 +272,68 @@ class CartController {
                     product.category
                 ))
 
+               
+
                 const quantity = item.quantity
                 //console.log("Product Price:", productPrice)
                 //console.log("Quantity:", quantity)
                 totalAmount += (quantity * productPrice)
+
+                purchasedProducts.push({
+                    title: product.title,
+                    quantity,
+                    price: productPrice
+                })
             }
 
             logger.info(totalAmount)
-            const userEmail = req.session.user.email
-            //console.log(userEmail)
+            console.log("aca")
+           
+        
             const ticketData = {
                 code: 'TICKET-' + Date.now().toString(36).toUpperCase(),
                 purchase_datetime: new Date(),
                 amount: totalAmount,
-                purchaser: userEmail
+               
             }
-    
+            console.log(totalAmount)
+         console.log(ticketModel)
+  console.log(ticketData)
             const ticket = new this.ticketModel(ticketData)
             await ticket.save()
 
+            console.log(productsNotPurchased)
+          
             if (productsNotPurchased.length > 0) {
-                cart.products = cart.products.filter(item => !productsNotPurchased.includes(item.product))
+                cart.product = cart.product.find(item => !productsNotPurchased.includes(item.product))
                 await cart.save()
+                
             } else {
                 await this.cartService.deleteAllProducts(cid)
                 logger.info('----------Cart empty----------')
             }
+            
+
+            const emailSubject = `Purchase Details - Ticket ${ticketData.code}`;
+            const emailBody = `
+                <p>Thank you for your purchase, ${user.first_name} ${user.last_name}!</p>
+                <p>Details of your ticket:</p>
+                <ul>
+                    <li><strong>Ticket Code:</strong> ${ticketData.code}</li>
+                    <li><strong>Purchase Date:</strong> ${ticketData.purchase_datetime}</li>
+                    <li><strong>Total Amount:</strong> ${ticketData.amount.toFixed(2)}</li>
+                </ul>
+                <p>Purchased Products:</p>
+                <ul>
+                    ${purchasedProducts.map(product => `
+                        <li>
+                            <strong>${product.title}</strong> - Quantity: ${product.quantity}, Price: $${product.price.toFixed(2)}
+                        </li>
+                    `).join('')}
+                </ul>
+            `
+            await sendEmail(user.email, emailSubject, emailBody)
+
             try {
                 await Promise.all(productUpdates)
                 return res.status(200).json({ status: 'success', message: 'Stock updated successfully' })

@@ -1,17 +1,18 @@
 
-<main>
+<main style="background-color: black;">
     <header>
         <h3 class="text-center">Product: </h3>
     </header>
     <div class="text-center">
         {{#each filteredProduct}}
         <img src="{{this.thumbnail}}" alt="">
-        <p><strong>Title: </strong>{{this.title}}</p>
-        <p><strong>Description: </strong>{{this.description}}</p>
-        <p><strong>Price: </strong>${{this.price}}</p>
-        <p><strong>Available: </strong>{{this.stock}}</p>
+        <p style="color: white;"><strong>Title: </strong>{{this.title}}</p>
+        <p style="color: white;"><strong>Description: </strong>{{this.description}}</p>
+        <p style="color: white;"> <strong>Price: </strong>${{this.price}}</p>
+        <p style="color: white;"><strong>Available: </strong>{{this.stock}}</p>
         {{/each}}
-        <a id="addToCartBtn" class="btn btn-secondary"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a id="addToCartBtn" class="btn btn-secondary"><i class="fa-solid fa-cart-shopping"> add</i></a>
+       
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -35,7 +36,10 @@
                         icon: 'success',
                         title: 'Product added to cart successfully!',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 3000,
+                        allowOutsideClick: false,
+                        footer: `<a href="/productsview">Continue buying</a>` 
+                       
                     })
                 } else if (data.message === 'Unauthorized') {
                     redirectToLogin()
@@ -47,6 +51,7 @@
                 console.error('Error adding product to cart:', error)
             });
     }
+
 
     function redirectToLogin() {
         window.location.href = '/login'

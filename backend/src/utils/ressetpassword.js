@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const { configObject } = require('../config/config')
 const { logger } = require('./logger')
 
-
+// Configurar el transporte de nodemailer
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
@@ -13,16 +13,17 @@ const transport = nodemailer.createTransport({
     }
 })
 
-
 exports.sendPasswordResetEmail = async (userId, userEmail) => {
-    
-    const token = jwt.sign({ userId }, 'clavesecreta', { expiresIn: '1h' })
+   
+    const token = jwt.sign({ userId }, 'secret', { expiresIn: '1h' })
 
+  
     const resetUrl = `https://localhost:8080/reset-password?token=${token}`
 
     // Crear y enviar el correo electrónico
     await transport.sendMail({
-        from: 'Tu aplicación <Ecommerce>',
+        
+        from: 'nikiamado123@gmail.com',
         to: userEmail,
         subject: 'Restablecer contraseña',
         html: `
@@ -32,14 +33,14 @@ exports.sendPasswordResetEmail = async (userId, userEmail) => {
     })
 }
 
-
+// Función para verificar y decodificar el token JWT
 exports.verifyResetToken = (token) => {
     try {
-        
-        const decoded = jwt.verify(token, 'clavesecreta')
+        // Verificar y decodificar el token
+        const decoded = jwt.verify(token, 'secret')
         return decoded
     } catch (error) {
-     
+        // Manejar errores de token inválido o expirado
         logger.error('Token not found')
         return null
     }

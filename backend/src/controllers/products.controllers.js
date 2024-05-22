@@ -51,10 +51,11 @@ class ProdcutsController {
                 //res.status(404).send("Product not exist")
             }
             const filteredProduct = await this.productService.getProductById(pid)
-            res.json({
+              res.render('details', { 
                 status: 'succes',
                 payload: filteredProduct
-            })    
+            })
+                  
         }catch(error) {
             next(error)
                 //res.status(500).send('Server error')

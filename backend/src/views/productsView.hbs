@@ -13,12 +13,13 @@
             </div>
         {{/eq}}
     {{/if}}
-    <div class="items-product">
+    
+    <div class="items-product" id="product">
         <ul>
             {{#each docs}}
                 <li><img src="{{this.thumbnail}}" alt=""></li>
                 <li>Title: {{this.title}}</li>
-                <a href="/products/details/{{this._id}}" class="btn btn-dark" style="margin: 5px">Details</a>
+                <a href="products/details/{{this._id}}" class="btn btn-dark" style="margin: 5px">Details</a>
                 <hr>
             {{/each}}
         </ul>

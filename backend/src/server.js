@@ -15,7 +15,8 @@ const { initializePassport } = require('./config/passport.config.js');
 const { model } = require('mongoose');
 const handlebarsHelpers = require('handlebars-helpers')();
 const eq = handlebarsHelpers.eq;
-const configureSocketIO = require('./helpers/socket.io.js')
+const configureSocketIO = require('./helpers/socket.io.js');
+const { sendEmail, transport } = require('./utils/sendEmail.js');
 
 const app = express();
 const port = 8080
@@ -25,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://front-end-mern-s5rp.onrender.com',
+  origin: 'https://localhost:8080',
   credentials: true
 }))
 app.use(session({
@@ -37,10 +38,13 @@ app.use(session({
     },
     ttl: 15000000000,
   }),
-  secret: 'secret',
+  secret: `secret`,
   resave: true,
   saveUninitialized: true
 }))
+
+app.use(cookieParser('secreta'))
+
 
 
 initializePassport();
@@ -80,6 +84,9 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
 app.engine(`hbs`, handlebars.engine());
+
+
+
 
 
 app.get(`/single`, (req, res) => {

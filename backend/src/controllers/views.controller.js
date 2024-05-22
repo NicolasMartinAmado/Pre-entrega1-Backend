@@ -3,6 +3,7 @@ const { productService, userService, cartService } = require('../repositories/se
 const { logger } = require('../utils/logger.js')
 const { sendPasswordResetEmail, verifyResetToken } = require('../utils/ressetpassword.js')
 const { createHash, isValidPassword } = require('../utils/hashPassword.js')
+const { sendEmail } = require('../utils/sendEmail.js')
 
 
 
@@ -125,6 +126,7 @@ class ViewsController {
 
     login = async (req,res) =>{
         res.render('login')
+
     }
 
     register = async (req,res) =>{
@@ -166,10 +168,12 @@ class ViewsController {
                 cartId,
                 productsWithQuantities
             }) */
-            res.json({
+            res.render('shoppingCart', {
                 title: 'Shopping Cart',
                 cartId,
-                productsWithQuantities,
+                productsWithQuantities
+                
+               
             })
         }
         catch(err){
@@ -189,12 +193,14 @@ class ViewsController {
         logger.info(user.email)
         try {
             // Enviar el correo electrónico de restablecimiento de contraseña
-            await sendPasswordResetEmail(user._id, user.email)
-            res.status(200).json({ message: 'Email sent successfully' })
+            await sendEmail(user._id, user.email)
+            res.status(200).json({ message: `Email sent successfully to ${user._id} + ${user.email}` })
         } catch (error) {
             //console.error('Error sending email:', error)
             res.status(500).json({ error: 'Error sending email' })
+            console.log(error)
         }
+        
     }
 
     resetPassword = async (req, res) => {

@@ -34,8 +34,8 @@ router.post('/create-checkout-session', async (req, res) =>{
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `https://front-end-mern-s5rp.onrender.com/success`,
-            cancel_url: 'https://front-end-mern-s5rp.onrender.com/cart',
+            success_url: `http://localhost:8080/success`,
+            cancel_url: 'http://localhost:8080/cart',
             customer_email: user.email,
         });
 

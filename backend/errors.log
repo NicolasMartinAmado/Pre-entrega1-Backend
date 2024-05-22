@@ -426,3 +426,121 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"${id}\"","value":"${id}","valueType":"string"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"login\"","value":"login","valueType":"string"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: Error during user login: Cannot set headers after they are sent to the client {"code":"ERR_HTTP_HEADERS_SENT","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at new NodeError (node:internal/errors:405:5)\n    at ServerResponse.setHeader (node:_http_outgoing:648:11)\n    at ServerResponse.header (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:794:10)\n    at ServerResponse.location (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:915:15)\n    at ServerResponse.redirect (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:953:18)\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:166:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Error during user login: Cannot set headers after they are sent to the client {"code":"ERR_HTTP_HEADERS_SENT","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at new NodeError (node:internal/errors:405:5)\n    at ServerResponse.setHeader (node:_http_outgoing:648:11)\n    at ServerResponse.header (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:794:10)\n    at ServerResponse.location (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:915:15)\n    at ServerResponse.redirect (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:953:18)\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:166:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Error during user login: Cannot set headers after they are sent to the client {"code":"ERR_HTTP_HEADERS_SENT","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at new NodeError (node:internal/errors:405:5)\n    at ServerResponse.setHeader (node:_http_outgoing:648:11)\n    at ServerResponse.header (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:794:10)\n    at ServerResponse.location (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:915:15)\n    at ServerResponse.redirect (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:953:18)\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:166:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"/productsView","root":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src/views"}}
+error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"/productsView","root":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src/views"}}
+error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"/productsview","root":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src/views"}}
+error: Error during user login: Cannot set headers after they are sent to the client {"code":"ERR_HTTP_HEADERS_SENT","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at new NodeError (node:internal/errors:405:5)\n    at ServerResponse.setHeader (node:_http_outgoing:648:11)\n    at ServerResponse.header (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:794:10)\n    at ServerResponse.location (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:915:15)\n    at ServerResponse.redirect (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:953:18)\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:167:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Error during user login: Cannot set headers after they are sent to the client {"code":"ERR_HTTP_HEADERS_SENT","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at new NodeError (node:internal/errors:405:5)\n    at ServerResponse.setHeader (node:_http_outgoing:648:11)\n    at ServerResponse.header (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:794:10)\n    at ServerResponse.append (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:755:15)\n    at res.cookie (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\node_modules\\express\\lib\\response.js:884:8)\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:156:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"/productsview","root":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src/views"}}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"login\"","value":"login","valueType":"string"}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"_message":"ticket validation failed","errors":{"purchaser":{"kind":"string","message":"Cast to string failed for value \"{ user: undefined }\" (type Object) at path \"purchaser\"","name":"CastError","path":"purchaser","reason":null,"stringValue":"\"{ user: undefined }\"","value":{},"valueType":"Object"}}}
+error: undefined
+error: undefined
+error: undefined {"_message":"ticket validation failed","errors":{"purchaser":{"kind":"required","message":"Path `purchaser` is required.","name":"ValidatorError","path":"purchaser","properties":{"message":"Path `purchaser` is required.","path":"purchaser","type":"required"}}}}
+error: undefined
+error: undefined
+error: undefined
+error: if doesn't match else - 21:15 {"column":15,"endColumn":17,"endLineNumber":21,"lineNumber":21,"name":"Error"}
+error: if doesn't match else - 21:15 {"column":15,"endColumn":17,"endLineNumber":21,"lineNumber":21,"name":"Error"}
+error: if doesn't match else - 21:15 {"column":15,"endColumn":17,"endLineNumber":21,"lineNumber":21,"name":"Error"}
+error: if doesn't match else - 21:15 {"column":15,"endColumn":17,"endLineNumber":21,"lineNumber":21,"name":"Error"}
+error: undefined
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"login\"","value":"login","valueType":"string"}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error during user login: Cannot read properties of null (reading 'email') {"stack":"TypeError: Cannot read properties of null (reading 'email')\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:103:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
