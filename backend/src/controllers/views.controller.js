@@ -7,6 +7,7 @@ const { sendEmail } = require('../utils/sendEmail.js')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { configObject } = require('../config/config.js')
+const Swal = require('sweetalert2')
 
 class ViewsController {
     constructor(){
@@ -212,7 +213,7 @@ class ViewsController {
                 const resetUrl = `https://backend-mern-s3ql.onrender.com/reset-password?token=${token}`
             
                 // Crear y enviar el correo electrónico
-                await transport.sendMail({
+               await transport.sendMail({
                     
                     from: 'nikiamado123@gmail.com',
                     to: user.email,
@@ -222,15 +223,19 @@ class ViewsController {
                         <a href="${resetUrl}">Restablecer contraseña</a>
                     `
                 })
+
+              
+                   
+                
             
         
-            res.status(200).json({ message: `Email sent successfully to ${user._id} + ${user.email}` })
+          
         } catch (error) {
             //console.error('Error sending email:', error)
             res.status(500).json({ error: 'Error sending email' })
             console.log(error)
         }
-        
+       
     }
 
     resetPassword = async (req, res) => {
