@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://localhost:8080',
+  origin: 'https://backend-mern-s3ql.onrender.com',
   credentials: true
 }))
 app.use(session({
@@ -94,7 +94,7 @@ app.get('/usuario', (req, res) => {
 
 
 const serverHttp = app.listen(port, () => {
-  logger.info(`Server is running on port http://localhost:${port}`);
+  logger.info(`Server is running on port https://backend-mern-s3ql.onrender.com`);
 });
 
 const io = configureSocketIO(serverHttp)

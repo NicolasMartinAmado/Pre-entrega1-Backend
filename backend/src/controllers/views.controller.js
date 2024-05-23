@@ -205,10 +205,10 @@ class ViewsController {
                     pass: "boja yrjt wpee psbz"
                 }
             })
-                const token = jwt.sign({ userId }, 'secret', { expiresIn: '1h' })
+                const token = jwt.sign({ userId }, configObject.jwt_secret_key, { expiresIn: '1h' })
             
               
-                const resetUrl = `https://localhost:8080/reset-password?token=${token}`
+                const resetUrl = `https://backend-mern-s3ql.onrender.com/reset-password?token=${token}`
             
                 // Crear y enviar el correo electrónico
                 await transport.sendMail({

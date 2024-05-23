@@ -165,7 +165,7 @@ class SessionController {
                         role: user.role,
                         token: token
                     }
-                })
+                }).alert("bienvenido").then(res.redirect(`products`))
                
             }
     
