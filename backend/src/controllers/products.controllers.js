@@ -162,10 +162,10 @@ class ProdcutsController {
             }
             console.log(product)
             console.log(user.role)
-            if (user.role === 'admin' || product.owner.equals(user._id)) {
+            if (user.role === 'admin' || product.user.equals(user._id)) {
                 const deletedProduct = await this.productService.deleteProduct(pid)
                 if (deletedProduct) {
-                    if (product.owner && user.role === 'premium') {
+                    if (product.user && user.role === 'premium') {
                         const ownerEmail = product.owner.email
                         const subject = 'Product Deleted'
                         const html = `

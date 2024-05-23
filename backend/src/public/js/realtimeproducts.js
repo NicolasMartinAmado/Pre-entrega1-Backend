@@ -1,4 +1,6 @@
+//const { logger } = require("../../utils/logger");
 
+//console.log("bienvenidos al script")
 const socket = io()
 
 socket.on('products', (data) => {
@@ -22,7 +24,7 @@ socket.on('products', (data) => {
 })
 
 const removeProduct = (id) => {
-  fetch(`http://localhost:8080/api/products/${id}`, {
+  fetch(`/api/products/${id}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
@@ -50,8 +52,7 @@ const addProduct = () => {
         status,
         category,
     }
-   
-    fetch("http://localhost:8080/api/products", {
+    fetch('api/products', {
         method:'POST',
         headers:{
             "Content-Type": "application/json",
@@ -62,6 +63,7 @@ const addProduct = () => {
     .then((data) => {
       //logger.info("Success:", data);
       console.log("success: ", data)
+      
       if (data.status === "error") {
         alert(data.message);
       }

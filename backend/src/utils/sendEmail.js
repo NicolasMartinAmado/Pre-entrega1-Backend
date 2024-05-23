@@ -1,32 +1,36 @@
 const nodemailer = require('nodemailer')
 const { configObject } = require('../config/config')
+const { text } = require('express')
 
 const transport = nodemailer.createTransport({
+    
+    secure: true,
     service: 'gmail',
     port: 587,
     auth: {
         user: configObject.gmail_user_app,
-        pass: configObject.gmail_password_app
+        pass: "boja yrjt wpee psbz",
     }
+    
 })
+
+
 
 async function sendEmail(to, subject, html) {
     try {
         await transport.sendMail({
-            from: 'Your App Name <nikiamado123@gmail.com>',
-            to: `nikiamado123@gmail.com`,
-            subject: `de prueba`,
-            html: `<div>
-            <h2>Bienvenido a prueba de email </h2>
-        </div>` 
-        
+            from: '<vehicles.ticket@gmail.com>',
+            to,
+            subject,
+            html
         })
-        
-        console.log(`Email sent to`)
+        console.log(`Email sent to ${to}`)
     } catch (error) {
-        console.error(`Error sending email`, error)
+        console.error(`Error sending email to ${to}:`, error)
         console.log(error)
     }
+
+    
 }
 
 module.exports = {

@@ -4,8 +4,9 @@ const { logger } = require('../utils/logger.js')
 const { sendPasswordResetEmail, verifyResetToken } = require('../utils/ressetpassword.js')
 const { createHash, isValidPassword } = require('../utils/hashPassword.js')
 const { sendEmail } = require('../utils/sendEmail.js')
-
-
+const nodemailer = require('nodemailer')
+const jwt = require('jsonwebtoken')
+const { configObject } = require('../config/config.js')
 
 class ViewsController {
     constructor(){
@@ -81,11 +82,11 @@ class ViewsController {
             const { limit, pageNumber, sort, query } = req.query
             const parsedLimit = limit ? parseInt(limit, 10) : 10
             const userId = req.session && req.session.user ? req.session.user.user : null
-            //logger.info(userId)
+            logger.info(userId)
             const user = await this.userViewService.getUserBy({ _id: userId })
-            //console.log('User data:', user)
+            console.log('User data:', user)
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
-            //console.log(docs, hasPrevPage, hasNextPage, prevPage, nextPage, page)
+          
             res.render('productsview', {
                 title: 'Products View',
                 user,
@@ -183,6 +184,7 @@ class ViewsController {
     }
 
     resetPasswordView = async(req, res) => {
+        
         res.render('reset-password')
     }
 
@@ -192,8 +194,35 @@ class ViewsController {
         logger.info(user._id)
         logger.info(user.email)
         try {
-            // Enviar el correo electrónico de restablecimiento de contraseña
-            await sendEmail(user._id, user.email)
+           
+            const transport = nodemailer.createTransport({
+               
+                secure: true,
+                service: 'gmail',
+                port: 465,
+                auth: {
+                    user: configObject.gmail_user_app,
+                    pass: "boja yrjt wpee psbz"
+                }
+            })
+                const token = jwt.sign({ userId }, 'secret', { expiresIn: '1h' })
+            
+              
+                const resetUrl = `https://localhost:8080/reset-password?token=${token}`
+            
+                // Crear y enviar el correo electrónico
+                await transport.sendMail({
+                    
+                    from: 'nikiamado123@gmail.com',
+                    to: user.email,
+                    subject: 'Restablecer contraseña',
+                    html: `
+                        <p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
+                        <a href="${resetUrl}">Restablecer contraseña</a>
+                    `
+                })
+            
+        
             res.status(200).json({ message: `Email sent successfully to ${user._id} + ${user.email}` })
         } catch (error) {
             //console.error('Error sending email:', error)

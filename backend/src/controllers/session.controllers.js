@@ -133,7 +133,6 @@ class SessionController {
                 user.last_connection = new Date()
                 await user.save()
 
-             
                 req.session.user = {
                     user: user._id,
                     first_name: user.first_name,

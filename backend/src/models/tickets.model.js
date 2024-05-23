@@ -15,9 +15,7 @@ const ticketSchema = new Schema({
         required: true,
     },
     purchaser: {
-        type: String,
-        ref: `users`,
-        default:"user"
+        type: String
     }
 })
 

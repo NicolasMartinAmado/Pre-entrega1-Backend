@@ -8,14 +8,15 @@
             <img src="{{this.productDetail.thumbnail}}" alt="">
             <p>{{this.productDetail.title}}</p>
             <p>Cantidad:{{this.quantity}}</p>
-           
+            
+        
         {{/each}}
     </div>
     <div class="text-center">
         <a id="purchase" class="btn btn-secondary">BUY</a>
     </div>
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.getElementById('purchase').addEventListener('click', function() {
     const cartId = "{{cartId}}"
@@ -27,17 +28,29 @@ document.getElementById('purchase').addEventListener('click', function() {
     })
     .then(response => {
         if (response.ok) {
-            return response.json()
+            return response.json()  
+            
         }
         throw new Error('Network response was not ok.')
     })
     .then(data => {
-        // Maneja la respuesta de éxito aquí
-        console.log(data)
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'PURCHASE SUCCESSFULL! WE HAVE SENT YOU AN EMAIL WITH ALL THE INFORMATION ABOUT THE PRODUCT YOU HAVE PURCHASE, THANK YOU!',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        footer: `<a href="/">HOME</a>` 
+                       
+                    })
+                    console.log(data)
+                }         
     })
     .catch(error => {
         // Maneja errores aquí
         console.error('Error:', error)
     })
 });
+
 </script>
+

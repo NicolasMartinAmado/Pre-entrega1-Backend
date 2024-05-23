@@ -45,13 +45,9 @@ app.use(session({
 
 app.use(cookieParser('secreta'))
 
-
-
 initializePassport();
 app.use(passport.initialize());
 app.use(appRouter);
-
-
 
 const swaggerOptions = {
   definition: {
@@ -88,13 +84,13 @@ app.engine(`hbs`, handlebars.engine());
 
 
 
-
+/** 
 app.get(`/single`, (req, res) => {
   res.send('archivo subido');
 });
 app.get('/usuario', (req, res) => {
   res.json({ nombre: 'Julian', edad: 85, apellido: 'Alvarez', correo: 'Julianalv@gmail.com' });
-});
+});*/
 
 
 const serverHttp = app.listen(port, () => {

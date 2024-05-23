@@ -5,14 +5,16 @@ const { logger } = require('./logger')
 
 // Configurar el transporte de nodemailer
 const transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    secure: true,
     service: 'gmail',
-    port: 587,
+    port: 465,
     auth: {
         user: configObject.gmail_user_app,
-        pass: configObject.gmail_password_app
+        pass: "boja yrjt wpee psbz"
     }
 })
-
+console.log(transport)
 exports.sendPasswordResetEmail = async (userId, userEmail) => {
    
     const token = jwt.sign({ userId }, 'secret', { expiresIn: '1h' })

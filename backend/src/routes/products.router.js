@@ -15,9 +15,10 @@ const {
 router
     .get('/', getProducts)
     .get('/:pid', getProductById)
+    .get(`products/pageNumber?`)
     .post('/', addProduct)
     .put('/:pid', updateProduct)
-    .delete('/:pid', isAdminOrPremium, deleteProduct)
+    .delete('/:pid', deleteProduct)
 
     console.log()
 module.exports = router

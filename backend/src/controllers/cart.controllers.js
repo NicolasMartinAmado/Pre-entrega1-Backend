@@ -233,9 +233,9 @@ class CartController {
     purchaseCart = async (req, res) => {
         try {
             const { cid } = req.params
-           
+           const user = req.session.user
             console.log("Entreee al purchase ", cid)
-            console.log("Purchase initiated by user:")
+            console.log("Purchase initiated by user:" ,user)
             const cart = await this.cartService.getCartById(cid)
             if (!cart) {
                 return res.status(404).json({ status: 'error', message: 'Cart not found' })
@@ -289,7 +289,8 @@ class CartController {
             logger.info(totalAmount)
             console.log("aca")
            
-        
+            const userEmail = user.email
+            console.log(userEmail)
             const ticketData = {
                 code: 'TICKET-' + Date.now().toString(36).toUpperCase(),
                 purchase_datetime: new Date(),
@@ -305,7 +306,7 @@ class CartController {
             console.log(productsNotPurchased)
           
             if (productsNotPurchased.length > 0) {
-                cart.product = cart.product.find(item => !productsNotPurchased.includes(item.product))
+                cart.product = cart.product.filter(item => !productsNotPurchased.includes(item.product))
                 await cart.save()
                 
             } else {
@@ -313,6 +314,9 @@ class CartController {
                 logger.info('----------Cart empty----------')
             }
             
+            
+
+           
 
             const emailSubject = `Purchase Details - Ticket ${ticketData.code}`;
             const emailBody = `
@@ -332,11 +336,12 @@ class CartController {
                     `).join('')}
                 </ul>
             `
-            await sendEmail(user.email, emailSubject, emailBody)
+            await sendEmail(userEmail, emailSubject, emailBody)
 
             try {
                 await Promise.all(productUpdates)
                 return res.status(200).json({ status: 'success', message: 'Stock updated successfully' })
+                
             } catch (error) {
                 return res.status(500).json({ status: 'error', message: 'Failed to update stock' })
             }
