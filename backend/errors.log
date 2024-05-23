@@ -574,3 +574,6 @@ error: undefined
 error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"75yughj2\"","value":"75yughj2","valueType":"string"}
 error: undefined
 error: undefined
+error: undefined
+error: undefined
+error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"productsview","root":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src/views"}}

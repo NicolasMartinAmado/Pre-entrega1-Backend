@@ -88,6 +88,8 @@ class ViewsController {
             console.log('User data:', user)
             const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, page } = await this.productViewService.getProducts({ limit: parsedLimit, pageNumber, sort, query })
           
+console.log(docs)
+
             res.render('productsview', {
                 title: 'Products View',
                 user,
@@ -100,7 +102,7 @@ class ViewsController {
             })
         }catch(err){
             logger.error(err)
-            res.status(500).send({message:'Server error'})
+            res.status(500).send({message:'Server error' + err})
             console.log(err)
         }
     }
