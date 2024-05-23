@@ -26,7 +26,8 @@ class ProdcutsController {
                 sort: sortOrder,
                 query: query || '',
             })
-            res.json({
+            res.render(`productsview`, {
+                title: "Productsview",
                 status: 'success',
                 payload: productsData,
             })
