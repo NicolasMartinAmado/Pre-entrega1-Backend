@@ -26,9 +26,9 @@ class ProdcutsController {
                 sort: sortOrder,
                 query: query || '',
             })
-            console.log({
+            res.render('productsview', { 
                 status: 'success',
-                payload: productsData,
+                payload: productsData
             })
 
 

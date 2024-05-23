@@ -266,7 +266,7 @@ console.log(docs)
             if (isValidPassword(newPassword, { password: user.password })) {
                 return res.status(400).json({ error: 'You can not use the same password' })
             }
-    
+            res.render('reset-passwordToken', { token })
             await this.userViewService.updateUserPassword(decodedToken.userId, createHash(newPassword))
     
             res.status(200).json({ message: 'Password updated successfully' })
@@ -274,6 +274,7 @@ console.log(docs)
             //logger.error('Error updating password:', error)
             res.status(500).json({ error: 'Error updating password' })
         }
+
     }
 
     resetPasswordViewToken = async(req, res) => {

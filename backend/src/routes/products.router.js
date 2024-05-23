@@ -19,5 +19,4 @@ router
     .put('/:pid', updateProduct)
     .delete('/:pid', deleteProduct)
 
-    console.log()
 module.exports = router
