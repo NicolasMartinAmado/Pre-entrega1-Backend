@@ -94,7 +94,7 @@ app.get('/usuario', (req, res) => {
 
 
 const serverHttp = app.listen(port, () => {
-  logger.info(`Server is running on port http://localhost:${port}`);
+  logger.info(`Server is running on port https://backend-mern-s3ql.onrender.com`);
 });
 
 const io = configureSocketIO(serverHttp)
