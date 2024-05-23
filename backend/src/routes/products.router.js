@@ -15,7 +15,6 @@ const {
 router
     .get('/', getProducts)
     .get('/:pid', getProductById)
-    .get(`products/pageNumber?`)
     .post('/', addProduct)
     .put('/:pid', updateProduct)
     .delete('/:pid', deleteProduct)

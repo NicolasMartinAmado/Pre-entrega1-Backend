@@ -14,7 +14,7 @@ const transport = nodemailer.createTransport({
         pass: "boja yrjt wpee psbz"
     }
 })
-console.log(transport)
+
 exports.sendPasswordResetEmail = async (userId, userEmail) => {
    
     const token = jwt.sign({ userId }, 'secret', { expiresIn: '1h' })
