@@ -10,15 +10,11 @@
             <p>Cantidad:{{this.quantity}}</p>
         {{/each}}
     </div>
-    {{#if productsWithQuantities === 0}}
-
-<h3>NO HAS AGREGADO PRODUCTOS TODAVIA</h3>
-    {{#else}}
-   <div class="text-center">
+    
+    <div class="text-center">
         <a id="purchase" class="btn btn-secondary">BUY</a>
     </div>
-    {{/if}}
-     
+   
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
