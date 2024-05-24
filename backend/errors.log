@@ -580,3 +580,10 @@ error: undefined {"view":{"defaultEngine":"hbs","ext":".hbs","name":"productsvie
 error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
 error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
 error: undefined {"code":"ENOENT","errno":-4058,"path":"C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\views\\layouts\\main.handlebars","syscall":"open"}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined

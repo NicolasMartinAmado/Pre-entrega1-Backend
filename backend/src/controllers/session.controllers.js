@@ -7,6 +7,7 @@ const { upload } = require('../utils/multer.js')
 const { sendEmail } = require('../utils/sendEmail.js')
 const jwt = require('jsonwebtoken')
 const { jwt_secret_key } = require('../config/config.js')
+const { default: Swal } = require('sweetalert2')
 
 
 
@@ -119,6 +120,7 @@ class SessionController {
                     maxAge: 60*60*1000*24,
                     httpOnly: false,
                 })
+                
             }
             else{
     
@@ -154,18 +156,9 @@ class SessionController {
                 res.cookie('token', token, {
                     maxAge: 60*60*1000*24,
                     httpOnly: false,
-                }).send({
-                    status: 'success',
-                    payload: {
-                        id: user._id,
-                        first_name: user.first_name,
-                        last_name: user.last_name,
-                        email: user.email,
-                        cart: user.cart,
-                        role: user.role,
-                        token: token
-                    }
-                })
+                }) 
+                res.redirect(`/productsview`)
+                
                
             }
     
