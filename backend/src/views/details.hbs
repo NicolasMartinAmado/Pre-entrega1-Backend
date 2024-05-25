@@ -43,7 +43,13 @@
                 } else if (data.message === 'Unauthorized') {
                     redirectToLogin()
                 } else {
-                    console.error('Error adding product to cart:', data.message)
+                    Swal.fire({
+                     icon: 'error',
+                        title: 'You are not login, log in or create an account to buy products',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        footer: `<a href="/login">LOGIN HERE</a>` 
+                    })
                 }
             })
             .catch(error => {
