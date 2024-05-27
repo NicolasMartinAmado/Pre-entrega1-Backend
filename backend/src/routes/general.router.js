@@ -17,7 +17,6 @@ router.use('/', viewsRouter)
 router.use('/api/session', sessionRouter)
 router.use('/api', mailRouter)
 router.use('/pruebas', pruebasRouter)
-
 router.use('/api/payments', paymentsRouter)
 
 router.use(handleError)

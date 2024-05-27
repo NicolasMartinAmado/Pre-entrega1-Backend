@@ -4,13 +4,15 @@ const stripe = require('stripe')(configObject.stripe_secret_key)
 
 const router = Router()
 
+router.get(`create-checkout-session`)
+
 router.post('/create-checkout-session', async (req, res) =>{
     const { user, products } = req.body
 
     console.log("users: ", user)
     console.log("products: ", products)
 
-    const lineItems = products.map((cartItem) => {
+    const lineItems = products.ma((cartItem) => {
         const { quantity } = cartItem;
         const product = cartItem[0];
 
