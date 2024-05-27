@@ -71,7 +71,10 @@ class SessionController {
             res.cookie('token', token, {
                 maxAge: 60*60*1000*24,
                 httpOnly: false,
-            }).send({
+            })   
+            res.redirect(`/login`)
+            
+            console.log({
                 status: 'success',
                 payload: {
                     id: result._id,
