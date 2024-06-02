@@ -269,7 +269,7 @@ console.log(docs)
          
             await this.userViewService.updateUserPassword(decodedToken.userId, createHash(newPassword))
     
-            res.render('reset-passwordToken', { token })
+            
         } catch (error) {
             //logger.error('Error updating password:', error)
             res.status(500).json({ error: 'Error updating password' })
@@ -284,7 +284,7 @@ console.log(docs)
             return res.status(400).json({ error: 'Token is required' })
         }
         
-      
+        res.render('reset-passwordToken', { token })
     }
 
     adminView = async (req, res) => {
