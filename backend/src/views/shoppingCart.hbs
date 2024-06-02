@@ -1,19 +1,31 @@
 
 <main>
+     
+            <li>
+                <a href="./productsview"><img src="../assets/img/flecha.png" alt=""></a>
+            </li>
+       
     <header>
+        
         <h3 class="text-center">Shopping Cart</h3>
+       
     </header>
+    <div>
+
+        
+    </div>
     <div class="text-center" id="productocart">
         {{#each productsWithQuantities}}
             <img src="{{this.productDetail.thumbnail}}" alt="">
             <p>{{this.productDetail.title}}</p>
             <p>Cantidad:{{this.quantity}}</p>
+        
         {{/each}}
     </div>
-    
-    <div class="text-center">
+         <div class="text-center">
         <a id="purchase" class="btn btn-secondary">BUY</a>
     </div>
+   
    
 </main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -40,7 +52,7 @@ document.getElementById('purchase').addEventListener('click', function() {
                         title: 'PURCHASE SUCCESSFULL! WE HAVE SENT YOU AN EMAIL WITH ALL THE INFORMATION ABOUT THE PRODUCT YOU HAVE PURCHASE, THANK YOU!',
                         showConfirmButton: false,
                         allowOutsideClick: false,
-                        footer: `<a href="/">HOME</a>` 
+                        footer: `<a href="/productsview">SEE MORE PRODUCTS</a>` 
                        
                     })
                     console.log(data)

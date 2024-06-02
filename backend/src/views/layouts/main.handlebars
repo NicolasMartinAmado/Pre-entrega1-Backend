@@ -10,14 +10,15 @@
 
     <header>
         <nav>
+              {{#if user}}
             <ul>
-                <li><a href="/">Home</a></li>
+               
                 <li><a href="../realtimeproducts">Real Time</a></li>
                 <li><a href="../chat">Chat</a></li>
                 <li><a href="../productsview">Products</a></li>
                 <li><a href="../shoppingCart"><i class="fa-solid fa-cart-shopping"></i>Cart</a></li>
             </ul>
-            {{#if user}}
+          
                 <a href="/api/session/logout" class="btn btn-info">Log out</a>
                 <a href="../reset-password" class="btn btn-info">Reset Password</a>
                 {{#each user}}
@@ -26,7 +27,7 @@
                 {{/if}}
                 {{/each}}
             {{else}}
-                <a href="./login" class="btn btn-info">Log in</a>
+               
             {{/if}}
         </nav>
     </header>

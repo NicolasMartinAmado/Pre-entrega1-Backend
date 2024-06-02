@@ -588,3 +588,31 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined
+error: undefined
+error: undefined
+error: #if requires exactly one argument {"name":"Error"}
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nicolasamado@gmail.com not found
+error: User nicolas@gmail.com not found
+error: User nicolas@gmail.com not found
+error: User nicolas@gmail.com not found
+error: User nicolasamado@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nicolas@gmail.com not found
+error: User nikiamado123@gmail.com not found
+error: User nicolasamado@gmail.com not found
+error: User nicolas@gmail.com not found
+error: User nicolas@gmail.com not found
+error: Error during user login: Cannot read properties of null (reading 'email') {"stack":"TypeError: Cannot read properties of null (reading 'email')\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:108:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Error during user login: Cannot read properties of null (reading 'email') {"stack":"TypeError: Cannot read properties of null (reading 'email')\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:108:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Error during user login: Cannot read properties of null (reading 'email') {"stack":"TypeError: Cannot read properties of null (reading 'email')\n    at login (C:\\Users\\Nixon\\Desktop\\Curso BACKEND\\backend\\src\\controllers\\session.controllers.js:107:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}

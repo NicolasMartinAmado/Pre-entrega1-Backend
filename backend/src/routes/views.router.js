@@ -24,7 +24,7 @@ const {
     adminView
 } = new ViewsController()
 
-router.get('/', home)
+router.get('/', login)
 
 router.get('/realtimeproducts', realTimeProducts)
 

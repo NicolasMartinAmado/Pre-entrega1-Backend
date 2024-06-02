@@ -1,4 +1,3 @@
-const { logger } = require("../../utils/logger")
 
 const socket = io()
 
@@ -15,7 +14,7 @@ Swal.fire({
     }
 }).then(result => {
     user = result.value
-    logger.info(user)
+    console.log(user)
 })
 
 chatBox.addEventListener('keyup', evt => {
@@ -25,12 +24,16 @@ chatBox.addEventListener('keyup', evt => {
             chatBox.value = ''
         }
     }
+    else if(chatBox.value === `hola`){
+        messageLogs.innerHTML += `<p>BOTADMIN: Hola, soy el BOT, en que puedo ayudarte?</p>`
+    }
 })
 
 socket.on('messageLogs', (data) => {
-    logger.info(`${data.user}: ${data.message}`)
+    console.log(`${data.user}: ${data.message}`)
     if (data && data.message) {
         const messageLogs = document.getElementById('messageLogs')
         messageLogs.innerHTML += `<p>${data.user}: ${data.message.message}</p>`
     }
+  
 })
