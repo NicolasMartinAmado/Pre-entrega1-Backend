@@ -33,7 +33,7 @@ router.get('/logout', logout)
 
 router.get('/current', [passportCall('jwt'), authorization(['ADMIN', 'PUBLIC'])], current)
 
-router.get('/github', passport.authenticate('github', {scope:['user:email']}), async (req,res)=>{})
+router.get('/github', passport.authenticate('github', {scope:['user:email']}), github)
 
 router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/'}),(req, res)=>{
     req.session.user = req.user
