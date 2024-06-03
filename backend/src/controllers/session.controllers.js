@@ -218,7 +218,7 @@ class SessionController {
 
     githubCallback = (req, res) => {
         req.session.user = req.user
-        res.redirect('/products')
+        res.redirect('/productsview')
     }
 
     toggleUserRole = async (req, res, next) => {
