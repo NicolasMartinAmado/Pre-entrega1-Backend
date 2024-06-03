@@ -11,13 +11,13 @@ exports.initializePassport = () => {
     }, async (accesToken, refreshToken, profile, done)=>{
         try{
             console.log(profile)
-            let user = await userService.get({email: profile._json.email})
+            let user = await userService.getBy({email: profile._json.email})
             if (!user) {
                 let newUser = {
                     first_name: profile.username,
                     last_name: profile.username,
                     email: profile._json.email,
-                    password: '1234'
+                    password: '1234',
                 }
                 let result = await userService.create(newUser)
                 console.log("Este es el nuevo usaurio", result)
@@ -25,7 +25,7 @@ exports.initializePassport = () => {
             }
             done(null, user)
         }catch(err){
-            return done(err)
+            return done(console.log(err))
         }
     }))
 
@@ -34,7 +34,7 @@ exports.initializePassport = () => {
         done(null, user.id)
     })
     passport.deserializeUser(async (id, done) => {
-        let user = await userService.get({_id: id})
+        let user = await userService.getBy({_id: id})
         done(null, user)
     })
 

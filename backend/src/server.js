@@ -22,7 +22,7 @@ const port = 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
-app.use(cookieParser());
+app.use(cookieParser(`secret`));
 
 app.use(
   session({
@@ -40,11 +40,11 @@ app.use(
   }),
 );
 
-app.use(cookieParser('secreta'));
+
 
 initializePassport();
 app.use(session({
-secret: `secreta`
+secret: `secret`
 }))
 app.use(passport.initialize());
 app.use(appRouter);
