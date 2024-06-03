@@ -43,6 +43,9 @@ app.use(
 app.use(cookieParser('secreta'));
 
 initializePassport();
+app.use(session({
+secret: `secreta`
+}))
 app.use(passport.initialize());
 app.use(appRouter);
 

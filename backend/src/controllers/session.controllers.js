@@ -8,6 +8,7 @@ const { sendEmail } = require('../utils/sendEmail.js')
 const jwt = require('jsonwebtoken')
 const { jwt_secret_key } = require('../config/config.js')
 const { default: Swal } = require('sweetalert2')
+const { initializePassport } = require('../config/passport.config.js')
 
 
 
@@ -211,6 +212,7 @@ class SessionController {
     }
 
     github = async (req,res)=>{
+        initializePassport()
         console.log (`connected`)
     }
 

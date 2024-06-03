@@ -5,8 +5,8 @@ const GithubStrategy = require('passport-github2')
 exports.initializePassport = () => {
 
     passport.use('github', new GithubStrategy({
-        clientID: ' Iv1.822ad80929b4bf57',
-        clientSecret: '836cccf764831118a11d5251db34decb0ed94c59',
+        clientID: ' Iv23ctU9T3UGoH2dA0pc',
+        clientSecret: '6aaab288a8ae5fef85c77409873fec9f243f3f6f',
         callbackURL: 'https://backend-mern-s3ql.onrender.com/api/session/githubcallback'
     }, async (accesToken, refreshToken, profile, done)=>{
         try{
