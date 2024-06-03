@@ -212,8 +212,7 @@ class SessionController {
     }
 
     github = async (req,res)=>{
-        initializePassport()
-        console.log (`connected`)
+       
     }
 
     githubCallback = (req, res) => {
