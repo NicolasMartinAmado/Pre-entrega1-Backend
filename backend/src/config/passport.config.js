@@ -2,7 +2,6 @@ const passport = require('passport')
 const userDaoMongo = require('../daos/mongo/userDaoMongo')
 const userService = new userDaoMongo()
 const GithubStrategy = require('passport-github2')
-
 exports.initializePassport = () => {
 
     passport.use('github', new GithubStrategy({
@@ -12,7 +11,7 @@ exports.initializePassport = () => {
     }, async (accesToken, refreshToken, profile, done)=>{
         try{
             console.log(profile)
-            let user = await userService.getUserBy({email: profile._json.email})
+            let user = await userService.get({email: profile._json.email})
             if (!user) {
                 let newUser = {
                     first_name: profile.username,
@@ -20,7 +19,7 @@ exports.initializePassport = () => {
                     email: profile._json.email,
                     password: '1234'
                 }
-                let result = await userService.createUser(newUser)
+                let result = await userService.create(newUser)
                 console.log("Este es el nuevo usaurio", result)
                 return done(null, result)
             }
@@ -35,7 +34,7 @@ exports.initializePassport = () => {
         done(null, user.id)
     })
     passport.deserializeUser(async (id, done) => {
-        let user = await userService.getUserBy({_id: id})
+        let user = await userService.get({_id: id})
         done(null, user)
     })
 
