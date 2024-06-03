@@ -8,7 +8,7 @@ exports.initializePassport = () => {
     passport.use('github', new GithubStrategy({
         clientID: ' Iv1.822ad80929b4bf57',
         clientSecret: '836cccf764831118a11d5251db34decb0ed94c59',
-        callbackURL: 'http://localhost:8080/api/sessions/githubcallback'
+        callbackURL: 'https://backend-mern-s3ql.onrender.com/api/session/githubcallback'
     }, async (accesToken, refreshToken, profile, done)=>{
         try{
             console.log(profile)
@@ -18,7 +18,7 @@ exports.initializePassport = () => {
                     first_name: profile.username,
                     last_name: profile.username,
                     email: profile._json.email,
-                    password: '123'
+                    password: '1234'
                 }
                 let result = await userService.createUser(newUser)
                 console.log("Este es el nuevo usaurio", result)

@@ -29,14 +29,13 @@ router.post('/register', register)
 
 router.post('/login', login)
 
-
 router.get('/logout', logout)
 
 router.get('/current', [passportCall('jwt'), authorization(['ADMIN', 'PUBLIC'])], current)
 
 router.get('/github', passport.authenticate('github', {scope: ['user:email']}), github)
 
-router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/login'}), githubCallback)
+router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/'}), githubCallback)
 
 router.get('/protected-route', isAuthenticated, (req, res) => {
     res.json({ message: 'Protected route' })

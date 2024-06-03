@@ -7,40 +7,40 @@ const mongoStore = require('connect-mongo');
 const passport = require('passport');
 const { addLogger, logger } = require('./utils/logger.js');
 const { connectDb, configObject } = require('./config/config.js');
-const cors = require('cors');
 const appRouter = require('./routes/general.router.js');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUiExpress = require('swagger-ui-express');
 const { initializePassport } = require('./config/passport.config.js');
-const { model } = require('mongoose');
 const handlebarsHelpers = require('handlebars-helpers')();
 const eq = handlebarsHelpers.eq;
 const configureSocketIO = require('./helpers/socket.io.js');
-const { sendEmail, transport } = require('./utils/sendEmail.js');
+
 
 const app = express();
-const port = 8080
+const port = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
-app.use(session({
-  store: mongoStore.create({
-    mongoUrl: configObject.mongo_uri, 
-    mongoOptions: {
+app.use(
+  session({
+    store: mongoStore.create({
+      mongoUrl: configObject.mongo_uri,
+      mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    },
-    ttl: 15000000000,
+      },
+      ttl: 15000000000,
+    }),
+    secret: `secret`,
+    resave: true,
+    saveUninitialized: true,
   }),
-  secret: `secret`,
-  resave: true,
-  saveUninitialized: true
-}))
+);
 
-app.use(cookieParser('secreta'))
+app.use(cookieParser('secreta'));
 
 initializePassport();
 app.use(passport.initialize());
@@ -78,52 +78,10 @@ app.set('views', __dirname + '/views');
 
 app.engine(`hbs`, handlebars.engine());
 
-
-
-
-/** 
-app.get(`/single`, (req, res) => {
-  res.send('archivo subido');
-});
-app.get('/usuario', (req, res) => {
-  res.json({ nombre: 'Julian', edad: 85, apellido: 'Alvarez', correo: 'Julianalv@gmail.com' });
-});*/
-
-
 const serverHttp = app.listen(port, () => {
   logger.info(`Server is running on port http://localhost:${port}`);
 });
 
-const io = configureSocketIO(serverHttp)
+const io = configureSocketIO(serverHttp);
 
-
-/*socketserver.on(`connection`, (socket) => {
-  console.log('nuevo cliente conectado');
-
-  let arraymsj = [];
-
-  socket.emit(`recibirmensaje`, arraymsj);
-
-  socket.on(`title`, (title) => {
-    console.log(title);
-    arraymsj.push({ id: socket.id, message: title });
-    socketserver.emit('mensaje-cliente', arraymsj);
-  });
-  socket.on(`description`, (description) => {
-    console.log(description);
-    arraymsj.push({ description: description });
-    socketserver.emit('mensaje-cliente', arraymsj);
-  });
-  socket.on(`enviardatos`, (title, description) => {
-    arraymsj.push({ title: title, description: description });
-    socketserver.emit('mensaje', arraymsj);
-  });
-
-  socket.on(`inputmensaje`, (data) => {
-    arraymsj.push(data);
-    socketserver.emit(`mensajeuser`, arraymsj);
-  });
-});*/
-
-
-module.exports = {app, io}
+module.exports = { app, io };

@@ -210,7 +210,9 @@ class SessionController {
         }
     }
 
-    github = async (req,res)=>{}
+    github = async (req,res)=>{
+        console.log (`connected`)
+    }
 
     githubCallback = (req, res) => {
         req.session.user = req.user
