@@ -268,7 +268,8 @@ console.log(docs)
             }
          
             await this.userViewService.updateUserPassword(decodedToken.userId, createHash(newPassword))
-    
+    console.log(user.password)
+            console.log(newPassword)
             
         } catch (error) {
             //logger.error('Error updating password:', error)
