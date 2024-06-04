@@ -48,9 +48,6 @@ router.get('/reset-passwordToken', resetPasswordViewToken, resetPassword)
 
 router.post('/reset-passwordToken', resetPasswordViewToken, resetPassword)
 
-
-router.post('/reset-passwordToken/:token', resetPassword)
-
 router.get('/admin', isAdmin, adminView)
 
 /* router.get('/logout', async (req,res) =>{
