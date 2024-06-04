@@ -44,7 +44,7 @@ router.get('/reset-password', resetPasswordView)
 
 router.post('/reset-password', sendResetEmail)
 
-router.get('/reset-password', resetPasswordViewToken)
+router.get('/reset-passwordToken', resetPasswordViewToken)
 
 router.post('/reset-password', resetPassword)
 
