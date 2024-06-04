@@ -10,8 +10,8 @@ class userDaoMongo {
     return await this.userModel.find({});
   }
 
-  async getBy(filter) {
-    return await this.userModel.findOne(filter);
+  async getBy({filter}) {
+    return await this.userModel.findOne({filter});
   }
 
   async create(newUser) {
