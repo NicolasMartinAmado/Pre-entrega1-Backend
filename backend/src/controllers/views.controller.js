@@ -212,7 +212,7 @@ console.log(docs)
                 const token = jwt.sign({ userId }, configObject.jwt_secret_key, { expiresIn: '1h' })
             
               
-                const resetUrl = `https://backend-mern-s3ql.onrender.com/reset-passwordToken?token=${token}`
+                const resetUrl = `https://backend-mern-s3ql.onrender.com/reset-password?token=${token}`
             
                 // Crear y enviar el correo electrónico
                await transport.sendMail({
@@ -243,8 +243,8 @@ console.log(docs)
     resetPassword = async (req, res) => {
         const { token } = req.query
         const { newPassword, confirmPassword } = req.body
-        const {userId} = req.session && req.session.user ? req.session.user.user : null
-        const {user} = await this.userViewService.getUserBy({ _id: userId })
+        const userId = req.session && req.session.user ? req.session.user.user : null
+        const user = await this.userViewService.getUserBy({ _id: userId })
         logger.info(user._id)
         logger.info(user.email)
         if (!token) {
@@ -279,7 +279,6 @@ console.log(docs)
             console.log(user)
             console.log(newPassword)
             console.log(error, newPassword)
-
             
         }
 
