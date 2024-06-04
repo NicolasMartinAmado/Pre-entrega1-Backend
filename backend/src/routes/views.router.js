@@ -42,7 +42,7 @@ router.get('/shoppingCart',shoppingCart)
 
 router.get('/reset-password', resetPasswordView)
 
-router.post('/reset-password', sendResetEmail)
+router.post('/reset-passwordToken', sendResetEmail)
 
 router.get('/reset-password', resetPasswordViewToken)
 
