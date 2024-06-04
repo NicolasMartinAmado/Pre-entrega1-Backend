@@ -243,8 +243,8 @@ console.log(docs)
     resetPassword = async (req, res) => {
         const { token } = req.query
         const { newPassword, confirmPassword } = req.body
-        const userId = req.session && req.session.user ? req.session.user.user : null
-        const user = await this.userViewService.getUserBy({ _id: userId })
+        const {userId} = req.session && req.session.user ? req.session.user.user : null
+        const {user} = await this.userViewService.getUserBy({ _id: userId })
         logger.info(user._id)
         logger.info(user.email)
         if (!token) {
@@ -278,7 +278,8 @@ console.log(docs)
             res.status(500).json({ error: 'Error updating password' })
             console.log(user)
             console.log(newPassword)
-            console.log(error)
+            console.log(error, newPassword)
+
             
         }
 

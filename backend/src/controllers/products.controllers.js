@@ -61,7 +61,7 @@ class ProdcutsController {
   addProduct = async (req, res, next) => {
     try {
       const product = req.body;
-      console.log(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.status, product.category);
+     
 
       const newProduct = await this.productService.addProduct({
         title: product.title,
