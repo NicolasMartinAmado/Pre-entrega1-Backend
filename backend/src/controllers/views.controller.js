@@ -260,13 +260,14 @@ console.log(docs)
             if (!decodedToken) {
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
+
             const user = await this.userViewService.getUserBy({decodedToken})
             if (!user) {
                 return res.status(400).json({ error: 'User not found' })
             }
     
             if (isValidPassword(newPassword, { password: user.password })) {
-                return res.status(400).json({ error: 'You can not use the same password' })
+                return res.status(400).json({ error: 'You can not use same password' })
             }
          
             await this.userViewService.updateUserPassword(decodedToken.userId, createHash(newPassword))
