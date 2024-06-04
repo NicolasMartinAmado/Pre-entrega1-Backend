@@ -279,7 +279,7 @@ console.log(docs)
     }
 
     resetPasswordViewToken = async(req, res) => {
-        const { token } = req.query
+        const { token } = req.params.token
 
         if (!token) {
             return res.status(400).json({ error: 'Token is required' })
