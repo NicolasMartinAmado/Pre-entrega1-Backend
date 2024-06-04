@@ -28,8 +28,4 @@ router
     .delete('/:cid', deleteAllProducts)
     .post('/:pid', addProductToCart2)
     .post('/:cid/purchase', purchaseCart)
-    
-    
-
-
 module.exports = router

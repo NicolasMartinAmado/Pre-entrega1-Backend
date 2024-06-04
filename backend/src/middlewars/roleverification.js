@@ -1,20 +1,17 @@
-
-
-
 function isAdminOrPremium(req, res, next) {
-    if (req.session.user && (req.session.user.role === 'admin')) {
-        next()
-    } else {
-        res.status(403).send('Access forbidden')
-    }
+  if (req.session.user && req.session.user.role === 'admin') {
+    next();
+  } else {
+    res.status(403).send('Access forbidden');
+  }
 }
 
 function isAdmin(req, res, next) {
-    if (req.session.user && (req.session.user.role === 'admin')){
-        next()
-   } else {
-        res.status(403).send('Access forbidden')
-   }
+  if (req.session.user && req.session.user.role === 'admin') {
+    next();
+  } else {
+    res.status(403).send('Access forbidden');
+  }
 }
 
 /**
@@ -22,15 +19,15 @@ function isAdmin(req, res, next) {
  * sends a 403 status code if not.
  */
 function isUser(req, res, next) {
-    if (req.session.user && req.session.user.role === 'user') {
-        next()
-    } else {
-        res.status(403).send('Access forbidden')
-    }
+  if (req.session.user && req.session.user.role === 'user') {
+    next();
+  } else {
+    res.status(403).send('Access forbidden');
+  }
 }
 
 module.exports = {
-    isAdminOrPremium,
-    isAdmin,
-    isUser,
-}
+  isAdminOrPremium,
+  isAdmin,
+  isUser,
+};

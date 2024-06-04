@@ -1,22 +1,22 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose');
 
 const messageSchema = new Schema({
-    user: {
+  user: {
+    type: String,
+    required: true,
+  },
+  messages: [
+    {
+      message: {
         type: String,
         required: true,
+      },
+      timestamp: {
+        type: Date,
+        default: Date.now,
+      },
     },
-    messages: [
-        {
-            message: {
-                type: String,
-                required: true,
-            },
-            timestamp: {
-                type: Date,
-                default: Date.now,
-            },
-        },
-    ],
-})
+  ],
+});
 
-exports.messageModel = model('message', messageSchema)
+exports.messageModel = model('message', messageSchema);

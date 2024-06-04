@@ -1,6 +1,3 @@
-
-
-
 const socket = io();
 
 const inputTitle = document.querySelector(`#Titleproduct`);
@@ -44,18 +41,15 @@ inputThumbnail.addEventListener(`keyup`, (evt) => {
   }
 });
 
-
 enviardatos.addEventListener(`click`, () => {
-
-    socket.emit(`enviardatos`, (inputDescription.value, inputTitle.value) )
-    socket.on(`mensaje`, arraymsj =>{
-        let mensajes = ''
-        arraymsj.forEach((mensaje) => {
-          mensajes += `<li style="color: white;">titulo:${mensaje.title} Producto: ${mensaje.description}</li>`;
-        });
-        mensajesDiv.innerHTML = mensajes;
-    })
-    
+  socket.emit(`enviardatos`, (inputDescription.value, inputTitle.value));
+  socket.on(`mensaje`, (arraymsj) => {
+    let mensajes = '';
+    arraymsj.forEach((mensaje) => {
+      mensajes += `<li style="color: white;">titulo:${mensaje.title} Producto: ${mensaje.description}</li>`;
+    });
+    mensajesDiv.innerHTML = mensajes;
+  });
 });
 
 socket.on(`recibirmensaje`, (data) => {

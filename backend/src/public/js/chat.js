@@ -1,39 +1,36 @@
+const socket = io();
 
-const socket = io()
-
-const chatBox = document.getElementById('chatBox')
-const messageLogs = document.getElementById('messageLogs')
+const chatBox = document.getElementById('chatBox');
+const messageLogs = document.getElementById('messageLogs');
 
 Swal.fire({
-    title: 'Your email',
-    input: 'text',
-    text: 'Fill with your email to chat',
-    allowOutsideClick: false,
-    inputValidator: value => {
-        return !value && 'You need fill the box to chat'
-    }
-}).then(result => {
-    user = result.value
-    console.log(user)
-})
+  title: 'Your email',
+  input: 'text',
+  text: 'Fill with your email to chat',
+  allowOutsideClick: false,
+  inputValidator: (value) => {
+    return !value && 'You need fill the box to chat';
+  },
+}).then((result) => {
+  user = result.value;
+  console.log(user);
+});
 
-chatBox.addEventListener('keyup', evt => {
-    if(evt.key === 'Enter'){
-        if(chatBox.value.trim().length > 0){
-            socket.emit('message', { user, message: chatBox.value })
-            chatBox.value = ''
-        }
+chatBox.addEventListener('keyup', (evt) => {
+  if (evt.key === 'Enter') {
+    if (chatBox.value.trim().length > 0) {
+      socket.emit('message', { user, message: chatBox.value });
+      chatBox.value = '';
     }
-    else if(chatBox.value === `hola`){
-        messageLogs.innerHTML += `<p>BOTADMIN: Hola, soy el BOT, en que puedo ayudarte?</p>`
-    }
-})
+  } else if (chatBox.value === `hola`) {
+    messageLogs.innerHTML += `<p>BOTADMIN: Hola, soy el BOT, en que puedo ayudarte?</p>`;
+  }
+});
 
 socket.on('messageLogs', (data) => {
-    console.log(`${data.user}: ${data.message}`)
-    if (data && data.message) {
-        const messageLogs = document.getElementById('messageLogs')
-        messageLogs.innerHTML += `<p>${data.user}: ${data.message.message}</p>`
-    }
-  
-})
+  console.log(`${data.user}: ${data.message}`);
+  if (data && data.message) {
+    const messageLogs = document.getElementById('messageLogs');
+    messageLogs.innerHTML += `<p>${data.user}: ${data.message.message}</p>`;
+  }
+});
