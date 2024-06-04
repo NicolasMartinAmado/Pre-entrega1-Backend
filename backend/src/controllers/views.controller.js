@@ -243,7 +243,10 @@ console.log(docs)
     resetPassword = async (req, res) => {
         const { token } = req.query
         const { newPassword, confirmPassword } = req.body
-        
+        const userId = req.session && req.session.user ? req.session.user.user : null
+        const user = await this.userViewService.getUserBy({ _id: userId })
+        logger.info(user._id)
+        logger.info(user.email)
         if (!token) {
             return res.status(400).json({ error: 'Token es requered' })
         }
@@ -257,8 +260,8 @@ console.log(docs)
             if (!decodedToken) {
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
-   const userId = req.session.user
-            const user = await this.userViewService.getUserBy(userId)
+   
+            const user = await this.userViewService.getUserBy(decodedToken.userId)
             if (!user) {
                 return res.status(400).json({ error: 'User not found' })
             }
