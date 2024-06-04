@@ -257,8 +257,8 @@ console.log(docs)
             if (!decodedToken) {
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
-    
-            const user = req.session.user;
+   const userId = req.session.user
+            const user = await this.userViewService.getUserBy(userId)
             if (!user) {
                 return res.status(400).json({ error: 'User not found' })
             }
