@@ -260,7 +260,6 @@ console.log(docs)
             if (!decodedToken) {
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
-   
             const user = await this.userViewService.getUserBy({decodedToken})
             if (!user) {
                 return res.status(400).json({ error: 'User not found' })
