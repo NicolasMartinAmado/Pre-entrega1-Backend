@@ -261,8 +261,8 @@ console.log(docs)
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
 
-            const user = await this.userViewService.getUserBy(userId)
-            if (!user) {
+            const userr = await this.userViewService.getUserBy(userId)
+            if (!userr) {
                 return res.status(400).json({ error: 'User not found' })
             }
     
@@ -274,8 +274,8 @@ console.log(docs)
     
             
         } catch (error) {
-            //logger.error('Error updating password:', error)
-            res.status(500).json({ error: 'Error updating password' })
+          
+            res.status(500).json({ error: 'Error updating password' + user + newPassword })
             console.log(user)
             console.log(newPassword)
             console.log(error, newPassword)
