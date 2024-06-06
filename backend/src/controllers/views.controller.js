@@ -7,7 +7,7 @@ const { sendEmail } = require('../utils/sendEmail.js')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { configObject } = require('../config/config.js')
-const Swal = require('sweetalert2')
+
 
 class ViewsController {
     constructor(){
