@@ -1,0 +1,26 @@
+.section_account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+color: white;
+    border: 3px white solid;
+    width: 600px;
+}
+#contenedorlogin{
+    padding: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    
+}
+#loginbody{
+    background-image: url(https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

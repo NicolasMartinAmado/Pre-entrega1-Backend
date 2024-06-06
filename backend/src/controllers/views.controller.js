@@ -164,9 +164,20 @@ console.log(docs)
                 return { productDetail, quantity: item.quantity }
             })
             
+           
             // Esperar a que todas las promesas se resuelvan
             const productsWithQuantities = await Promise.all(productDetailsPromises)
             
+            if(productsWithQuantities.length == 0){
+                res.render('shoppingCartempty', {
+                    title: 'Shopping Cart',
+                    cartId,
+                    productsWithQuantities
+                    
+                   
+                })
+            }
+
             //console.log('Products with quantities:', productsWithQuantities)
             /* res.render('shoppingCart', { 
                 title: 'Shopping Cart',

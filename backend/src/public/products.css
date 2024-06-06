@@ -1,0 +1,13 @@
+#productsbody{
+    background-image: url(https://images.pexels.com/photos/248747/pexels-photo-248747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+    
+}
+#header{
+    background-image: url(https://img.freepik.com/fotos-premium/fondo-pantalla-coleccion-autos-deportivos_970779-1408.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
