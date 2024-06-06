@@ -274,10 +274,7 @@ console.log(docs)
     
             
         } catch (error) {
-          
             res.status(500).json({ error: error+ 'Error updating password' + user + newPassword })
-           
-            
         }
 
     }
