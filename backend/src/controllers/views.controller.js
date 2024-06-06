@@ -270,15 +270,13 @@ console.log(docs)
                 return res.status(400).json({ error: 'You can not use same password' })
             }
          
-            await this.userViewService.updateUserPassword(user, createHash(newPassword))
+            await this.userViewService.updateUserPassword(userId, createHash(newPassword))
     
             
         } catch (error) {
           
-            res.status(500).json({ error: 'Error updating password' + user + newPassword })
-            console.log(user)
-            console.log(newPassword)
-            console.log(error, newPassword)
+            res.status(500).json({ error: error+ 'Error updating password' + user + newPassword })
+           
             
         }
 
