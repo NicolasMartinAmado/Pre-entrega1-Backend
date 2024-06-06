@@ -7,7 +7,8 @@ const { sendEmail } = require('../utils/sendEmail.js')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { configObject } = require('../config/config.js')
-
+const Swal = require('sweetalert2')
+const alert = require('../utils/sweetalert.js')
 
 class ViewsController {
     constructor(){
@@ -250,9 +251,7 @@ console.log(docs)
         }
     
         if (newPassword !== confirmPassword) {
-            return Swal.fire({
-                title: `ERROR, LAS CONTRASEÑAS DEBEN SER IGUALES` 
-            })
+            return alert
         }
 
         try {
