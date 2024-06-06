@@ -169,7 +169,7 @@ console.log(docs)
             const productsWithQuantities = await Promise.all(productDetailsPromises)
             
             if(productsWithQuantities.length == 0){
-                res.render('shoppingCartempty', {
+              return  res.render('shoppingCartempty', {
                     title: 'Shopping Cart',
                     cartId,
                     productsWithQuantities
