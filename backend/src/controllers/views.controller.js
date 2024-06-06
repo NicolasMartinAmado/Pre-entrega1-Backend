@@ -8,7 +8,6 @@ const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { configObject } = require('../config/config.js')
 const Swal = require('sweetalert2')
-const alert = require('../utils/sweetalert.js')
 
 class ViewsController {
     constructor(){
@@ -251,7 +250,7 @@ console.log(docs)
         }
     
         if (newPassword !== confirmPassword) {
-            return alert
+            return res.status(400).json({ error: 'Passwords do not match' })
         }
 
         try {
