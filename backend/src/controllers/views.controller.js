@@ -195,8 +195,6 @@ console.log(docs)
     sendResetEmail = async (req, res) => {
         const userId = req.session && req.session.user ? req.session.user.user : null
         const user = await this.userViewService.getUserBy({ _id: userId })
-        logger.info(user._id)
-        logger.info(user.email)
         try {
            
             const transport = nodemailer.createTransport({
