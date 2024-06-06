@@ -250,7 +250,9 @@ console.log(docs)
         }
     
         if (newPassword !== confirmPassword) {
-            return res.status(400).json({ error: 'Passwords do not match' })
+            return Swal.fire({
+                title: `ERROR, LAS CONTRASEÑAS DEBEN SER IGUALES` 
+            })
         }
 
         try {
