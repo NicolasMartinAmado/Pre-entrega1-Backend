@@ -244,7 +244,7 @@ console.log(docs)
         const { token } = req.query
         const { newPassword, confirmPassword } = req.body
         const userId = req.session && req.session.user ? req.session.user.user : null
-        const user = await this.userViewService.getUserBy({ _id: userId })
+      
         logger.info(user._id)
         logger.info(user.email)
         if (!token) {
@@ -261,8 +261,8 @@ console.log(docs)
                 return res.status(400).json({ error: 'Token is no valid or expired' })
             }
 
-            const userr = await this.userViewService.getUserBy(userId)
-            if (!userr) {
+         
+            if (!userId) {
                 return res.status(400).json({ error: 'User not found' })
             }
     
