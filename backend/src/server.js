@@ -40,8 +40,6 @@ app.use(
   }),
 );
 
-
-
 initializePassport();
 app.use(session({
 secret: `secret`
