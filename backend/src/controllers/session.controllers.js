@@ -156,7 +156,7 @@ class SessionController {
       }
     } catch (error) {
       logger.error('Error during user login:', error);
-      res.status(500).send({ status: 'error', error: 'Internal Server Error' });
+      res.status(500).send(`USER DONT EXIST`);
     }
   };
 
