@@ -21,11 +21,7 @@
           
                 <a href="/api/session/logout" class="btn btn-info">Log out</a>
                 <a href="../reset-password" class="btn btn-info">Reset Password</a>
-                {{#each user}}
-                    {{#if this._id}}
-                    <button class="btn btn-info change-role-btn" data-user-id="{{this._id}}">Change User Role</button>
-                {{/if}}
-                {{/each}}
+               
             {{else}}
                
             {{/if}}
