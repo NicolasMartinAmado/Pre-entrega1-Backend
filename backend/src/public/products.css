@@ -11,3 +11,40 @@
     background-attachment: fixed;
     background-size: cover;
 }
+
+#productsbody #detail li img{
+  height: 590px;
+  width: 750px;
+}
+
+
+@media (max-width: 830px){
+
+  #productsbody #product li img{
+
+    height: 290px;
+    width: 350px;
+    
+  }
+  #productsbody #detail li img{
+    height: 290px;
+    width: 350px;
+  }
+
+}
+
+@media (max-width: 460px){
+
+  #productsbody #product li img{
+
+    height: 220px;
+    width: 300px;
+    
+  }
+
+  #productsbody #detail li img{
+    height: 220px;
+    width: 300px;
+  }
+
+}

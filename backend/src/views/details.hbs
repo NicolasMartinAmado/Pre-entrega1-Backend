@@ -1,11 +1,11 @@
-
-<main style="background-color: black;">
+<link rel="stylesheet" href="../../products.css">
+<main id="productsbody" style="background-color: black;">
     <header>
-        <h3 class="text-center">Product: </h3>
+        <h3 style="color: white;" class="text-center">Product: </h3>
     </header>
-    <div class="text-center">
+    <div id="detail" class="text-center">
         {{#each filteredProduct}}
-        <img src="{{this.thumbnail}}" alt="">
+       <li> <img class="img-fluid" src="{{this.thumbnail}}" alt=""> </li> 
         <p style="color: white;"><strong>Title: </strong>{{this.title}}</p>
         <p style="color: white;"><strong>Description: </strong>{{this.description}}</p>
         <p style="color: white;"> <strong>Price: </strong>${{this.price}}</p>

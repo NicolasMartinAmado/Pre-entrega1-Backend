@@ -1,4 +1,4 @@
-const handlebars = require(`express-handlebars`);
+const handlebars = require(`express-handlebars`); 
 const express = require(`express`);
 const { Server } = require(`socket.io`);
 const session = require('express-session');
